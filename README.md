@@ -1,6 +1,4 @@
-# PHP Project Level Two
+# PHP Level Two Project - IT Village
 
-IT Village
-
-Тheme: Flex Start
-Dice Images: https://commons.wikimedia.org/wiki/Category:Dice_faces
+## Тheme: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+## Dice Images: https://commons.wikimedia.org/wiki/Category:Dice_faces
