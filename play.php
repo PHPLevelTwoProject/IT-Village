@@ -1,5 +1,9 @@
 <?php
     include './partials/head.php';
+
+    if (!isset($_SESSION['click_count'])) {
+		$_SESSION['click_count'] = 0;
+    }
 ?>
 
 <body>
@@ -30,21 +34,44 @@
     <div class="col-lg-12 text-center">
         <div class="" data-aos="zoom-out" data-aos-delay="200">
 			<?php
-			    include './partials/ground_renderer.php'
+			    include './partials/ground_renderer.php';
+			    include './partials/points_logic.php';
 			?>
         </div>
         <form action="">
-            <a href="./play.php" class="btn btn-outline-primary">Хвърли зарчето</a>
+            <?php
+			if ($_SESSION['click_count'] == 0) {
+			    echo "<h1>Готови ли сте?</h1>";
+				$text_to_render = "Започни играта";
+            }
+            else if ($_SESSION['click_count'] == 1) {
+				echo "<h1>Хвърлете зарчето, за да започнете.</h1>";
+				$text_to_render = "Хвърли зарчето";
+			}
+			else {
+				$text_to_render = "Хвърли зарчето";
+			}
+            ?>
+            <a href="./play.php" class="btn btn-outline-primary"><?= $text_to_render ?></a>
         </form>
         <br>
         <div class="" data-aos="zoom-out" data-aos-delay="200">
             <?php
-			    include './partials/dice_renderer.php'
+			    include './partials/dice_renderer.php';
             ?>
         </div>
         <div class="" data-aos="zoom-out" data-aos-delay="200">
-            <a href="./partials/reset.php" class="btn btn-outline-danger">Занули резултат</a>
+            <?php
+			if ($_SESSION['click_count'] == 0) {
+            }
+			else if ($_SESSION['click_count'] == 1) {
+			}
+			else {
+                echo "<a href=\"./partials/reset.php\" class=\"btn btn-outline-danger\">Занули резултат</a>";
+            }
+            ?>
         </div>
+		<?php $_SESSION['click_count'] += 1; ?>
     </div>
     </div>
     </div>
