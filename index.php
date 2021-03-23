@@ -10,20 +10,21 @@ include 'partials/head.php';
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="assets/img/village-logo.png" alt="">
         <span>IT Village</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link active" href="#">Начало</a></li>
-          <li><a class="nav-link" href="#description">Описание</a></li>
-<!--            --><?php
+            <li><a class="nav-link" href="#description">Описание</a></li>
+            <li><a class="nav-link" href="./rules.php">Правила</a></li>
+            <li><a class="nav-link" href="./statistics.php">Статистики</a></li>
+            <!--            --><?php
 //            $logged_in = false;
 //            if ($logged_in) { ?>
                 <li><a class="nav-link" href="./play.php">Играй</a></li>
 <!--            --><?php //} ?>
-            <li><a class="nav-link" href="./statistics.php">Статистики</a></li>
             <li><a class="nav-link" href="./login.php">Влез</a></li>
             <li><a class="nav-link" href="./register.php">Регистрирай се</a></li>
         </ul>
@@ -104,6 +105,5 @@ include 'partials/head.php';
   </main>
 
 <?php
-    include './partials/footer.php';
-    include './partials/scripts.php';
-?>
+
+include './partials/footer.php';

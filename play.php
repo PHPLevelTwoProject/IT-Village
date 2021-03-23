@@ -9,7 +9,7 @@ include './partials/head.php';
 <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="index.php" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
+            <img src="assets/img/village-logo.png" alt="">
             <span>IT Village</span>
         </a>
         <nav id="navbar" class="navbar">
@@ -107,6 +107,3 @@ include './partials/head.php';
 <?php
 
 include './partials/footer.php';
-include './partials/scripts.php';
-
-?>

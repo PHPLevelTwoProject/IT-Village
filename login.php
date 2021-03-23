@@ -2,6 +2,7 @@
     include './partials/head.php';
 ?>
 
+
 <main id="main">
 	<section id="project" class="project">
 		<div class="container" data-aos="fade-up">
@@ -28,6 +29,9 @@
 </main>
 
 <?php
+
+include './partials/footer.php';
+=======
 if(isset($_POST['submit'])){
 	if(preg_match('/^[a-zA-Z0-9]+$/',$_POST['username']) &&  preg_match('/^[a-zA-Z0-9]+$/',$_POST['pass'])) {
 		$sql = "SELECT `name`,`password` FROM `users`";
@@ -51,3 +55,4 @@ if(isset($_POST['submit'])){
     include './partials/footer.php';
     include './partials/scripts.php';
 ?>
+
