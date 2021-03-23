@@ -1,16 +1,36 @@
 <?php
 
-// at game start it is negative value
-if (!isset($_SESSION['random_dice_number'])) {
-	$_SESSION['random_dice_number'] = -1;
-}
-
 $random_dice_number = $_SESSION['random_dice_number'];
 
-if ($random_dice_number == -1) { ?>
-<!--    <img src="./images/dice/dice_6.png" alt="">-->
-<!--    <br><br>-->
-<?php }
+// legacy code
+//if ($_SESSION['click_count'] == 2) {
+//	$random_dice_number = 0;
+//	$random_dice_number += 1;
+////	if ($random_dice_number > 6) {
+////	    $overdraft = $random_dice_number - 6;
+////		$random_dice_number -= $overdraft;
+////	}
+//}
+
+// debugging and testing purposes, do not delete for now
+//if ($random_dice_number == -1) {
+//	echo "Dice number is -1 <br>";
+//}
+//
+//else if ($random_dice_number == 0) {
+//	echo "Dice number is 0 <br>";
+//	echo "<br>";
+//	echo "Click count is " . $_SESSION['click_count']; ?>
+<!--	<img src="./images/dice/dice_6.png" alt =""><br><br>-->
+<!--    --><?php
+//}
+//else {
+//    echo "Dice number is " . $random_dice_number;
+//    echo "<br>";
+//    echo "Click count is " . $_SESSION['click_count'];
+//}
+
+// conditional rendering
 if ($random_dice_number == 1) { ?>
     <img src="./images/dice/dice_1.png" alt="">
     <br><br>
@@ -48,10 +68,7 @@ else {
 	$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
 }
 
-//
 //if ($_SESSION['random_dice_number'] > 0) {
 //	$_SESSION['random_dice_number'] = rand(1, 6);
 //	$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
 //}
-//
-//

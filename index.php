@@ -1,5 +1,7 @@
 <?php
-    include 'partials/head.php';
+
+include 'partials/head.php';
+
 ?>
 
 <body>
@@ -16,8 +18,8 @@
         <ul>
           <li><a class="nav-link active" href="#">Начало</a></li>
           <li><a class="nav-link" href="#description">Описание</a></li>
-            <?php
-            $logged_in = false;
+<!--            --><?php
+//            $logged_in = false;
 //            if ($logged_in) { ?>
                 <li><a class="nav-link" href="./play.php">Играй</a></li>
 <!--            --><?php //} ?>
@@ -33,9 +35,8 @@
   <!-- ======= End Header ======= -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
-
-    <div class="container">
+  <section id="hero" class="hero d-flex align-items-center ">
+    <div class="container ">
       <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">PHP Project Level Two</h1>
@@ -47,15 +48,16 @@
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
+
           </div>
         </div>
-        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
           <img src="./images/gameground/gameground_state_10.png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
-
   </section>
+
   <!-- ======= End Hero Section ======= -->
 
   <main id="main">

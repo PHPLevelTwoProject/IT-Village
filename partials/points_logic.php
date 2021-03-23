@@ -1,28 +1,19 @@
 <?php
 
-/*
- * Wi-Fi кръчма - P - Трябва да си купите един Cloud Коктейл - -5 монети - няколко
- * Wi-Fi мотел - I - Много
- * -- Ако имате достатъчно пари, трябва да го купите -> -100 монети
- * -- Ако нямате достатъчно пари, трябва да си платите за престоя -> -10 монети
- * Freelance Project - F - Получавате заплащане - +20 монети - Много
- * Буря - S - Wi-Fi в селото умира и вие се депресирате и изпускате 2 хода. - Много
- * Супер РНР - V - Монетите ви се увеличават 10 пъти - *10 - Само едно поле
- * VSO - N - Ако стъпите на това поле - печелите игра - едно
- * Входна позиция - - - Полето, от което стартирате играта - Само едно
- * Празни полета - 0 - Празно поле - - - Винаги 4
- */
 
-// Start => P => I => F => S => F => V => I => F => F => I => N => P =>  Go to First Position
-// Start => Wi-Fi-Bar => Wi-Fi-Motel => Freelance Project
-//       => Storm => Freelance Project => Super-PHP => Wi-Fi-Motel
-//       => Freelance Project => Freelance Project => Wi-Fi-Motel => VSO
-//       => Wi-Fi-Bar => Go to First Position
-
-// start with 50 points, 0 motels bought, 0 rounds to skip, not won, not lost
 if (!isset($_SESSION['user_points'])) {
 	$_SESSION['user_points'] = 50;
 }
+
+
+
+if (!isset($_SESSION['user_has_lost_because_of_money'])) {
+	$_SESSION['user_has_lost_because_of_money'] = false;
+}
+if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
+	$_SESSION['user_has_lost_because_of_turns'] = false;
+}
+
 if (!isset($_SESSION['motels_bought'])) {
 	$_SESSION['motels_bought'] = 0;
 }
@@ -44,12 +35,26 @@ if (!isset($_SESSION['user_has_won_because_of_motels'])) {
 	$_SESSION['user_has_won_because_of_motels'] = false;
 }
 
-if (!isset($_SESSION['user_has_lost_because_of_money'])) {
-	$_SESSION['user_has_lost_because_of_money'] = false;
-}
-if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
-	$_SESSION['user_has_lost_because_of_turns'] = false;
-}
+/*
+ * Wi-Fi кръчма - P - Трябва да си купите един Cloud Коктейл - -5 монети - няколко
+ * Wi-Fi мотел - I - Много
+ * -- Ако имате достатъчно пари, трябва да го купите -> -100 монети
+ * -- Ако нямате достатъчно пари, трябва да си платите за престоя -> -10 монети
+ * Freelance Project - F - Получавате заплащане - +20 монети - Много
+ * Буря - S - Wi-Fi в селото умира и вие се депресирате и изпускате 2 хода. - Много
+ * Супер РНР - V - Монетите ви се увеличават 10 пъти - *10 - Само едно поле
+ * VSO - N - Ако стъпите на това поле - печелите игра - едно
+ * Входна позиция - - - Полето, от което стартирате играта - Само едно
+ * Празни полета - 0 - Празно поле - - - Винаги 4
+ */
+
+// Start => P => I => F => S => F => V => I => F => F => I => N => P =>  Go to First Position
+// Start => Wi-Fi-Bar => Wi-Fi-Motel => Freelance Project
+//       => Storm => Freelance Project => Super-PHP => Wi-Fi-Motel
+//       => Freelance Project => Freelance Project => Wi-Fi-Motel => VSO
+//       => Wi-Fi-Bar => Go to First Position
+
+
 
 $points = [
 	"Wi-Fi-Bar" => "-5",
@@ -64,7 +69,7 @@ $points = [
 //could give bugs
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	// if he has to skip position we don't move him
-	if ($_SESSION['has_to_skip_two_rounds']) {
+	if ($_SESSION['has_to_skip_two_rounds'] == true) {
 		// increment skipped rounds count to keep track of them
 		$_SESSION['skipped_rounds_count'] += 1;
 		// if he has already skipped two rounds, free him
@@ -109,22 +114,23 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		else if (isset($position) && $position == 9) { // Motel
 			motel();
 		}
-		else if (isset($position) && $position == 10) {
-			win_game();
-			return;
-		}
-		else if (isset($position) && $position == 11) {
+//		else if (isset($position) && $position == 10) { // VSO, already handeled logic
+//			win_game();
+//		}
+		else if (isset($position) && $position == 11) { // bar
 			bar();
 		}
 		
 		// always check the state
-		check_if_game_is_lost_or_won();
+		check_if_game_is_lost_or_won_and_take_action();
 	}
 }
 
 // if he steps on motel and has money => buy it and decrement money; else => pay the tax
 function motel() {
-	if ($_SESSION['user_points'] > 100) {
+	// is it okay to have 0 points for a millisecond?
+	// suppose he has 100 and buys the motel and then gains 20 - is this permitted
+	if ($_SESSION['user_points'] >= 100) {
 		// buy the motel with a price of 100
 		$_SESSION['user_points'] -= 100;
 
@@ -156,20 +162,24 @@ function freelance(){
 }
 
 // if he is here - he has won the game
-function win_game() {
-	// save his score to db (name, score, date of game played)
-	// set has won to true, so in the template we render "You won! Score: xyz"
-	$_SESSION['user_has_won'] = true;
-}
+//function win_game() {
+//	// save his score to db (name, score, date of game played)
+//	// set has won to true, so in the template we render "You won! Score: xyz"
+//	$_SESSION['user_has_won_because_of_vso'] = true;
+//}
 
 // game ends when either:
 // - insufficient money
 // - bought every single motel
 // - no more turns
 // - steps on VSO field - already handled by win_game()
-function check_if_game_is_lost_or_won() {
+function check_if_game_is_lost_or_won_and_take_action() {
+//	if ($_SESSION['user_has_won_because_of_vso']) {
+//		header('Location: won.php');
+//	}
+
 	if ($_SESSION['user_points'] <= 0) {
-		// he is lost because of money, set that value to true and return,
+		// he is lost because of money, set that value to true and return
 		$_SESSION['user_has_lost_because_of_money'] = true;
 		return;
 	}

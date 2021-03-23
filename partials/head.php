@@ -2,8 +2,29 @@
 
 session_start();
 
+// start with 50 points, 0 motels bought, 0 rounds to skip, not won, not lost
+if (!isset($_SESSION['user_points'])) {
+	$_SESSION['user_points'] = 50;
+}
 
+// 0 clicks at game start
+if (!isset($_SESSION['click_count'])) {
+	$_SESSION['click_count'] = 0;
+}
 
+if (!isset($_SESSION['random_dice_number'])) {
+	$_SESSION['random_dice_number'] = -1;
+}
+
+// current position of the player
+if (!isset($_SESSION['current_gameground_position'] )) {
+	$_SESSION['current_gameground_position'] = -1;
+}
+
+// if position is out of bounds, lower it to correct value
+if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] > 11) {
+    $_SESSION['current_gameground_position'] -= 12;
+}
 
 ?>
 <!DOCTYPE html>
