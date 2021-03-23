@@ -12,6 +12,16 @@
   scroll-behavior: smooth;
 }
 
+.custom-white-override {
+  color: white !important;
+}
+
+.background-image-custom {
+  background-image: url("../../images/background/vertical.jpeg");
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -2326,7 +2336,7 @@ section {
 
 .footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #d0d4fc;
+  color: black;
   font-size: 12px;
   line-height: 0;
 }
