@@ -1,64 +1,58 @@
-<!DOCTYPE html>
 <?php
     include './partials/head.php';
 ?>
 
-<body>
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top">
-	<div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-		<a href="index.php" class="logo d-flex align-items-center">
-			<img src="assets/img/village-logo.png" alt="">
-			<span>IT Village</span>
-		</a>
-		<nav id="navbar" class="navbar">
-			<ul>
-				<li><a class="nav-link" href="./index.php">Начало</a></li>
-				<li><a class="nav-link active" href="./register.php">Регистрирай се</a></li>
-			</ul>
-			<i class="bi bi-list mobile-nav-toggle"></i>
-		</nav>
-	</div>
-</header>
-<!-- ======= End Header ======= -->
-
-<!-- ======= Placeholder Section ======= -->
-<section id="" class="d-flex align-items-center">
-	<div class="container">
-		<div class="row">
-		</div>
-	</div>
-</section>
-<!-- ======= End Placeholder Section ======= -->
 
 <main id="main">
 	<section id="project" class="project">
-	<div class="container" data-aos="fade-up">
-		<header class="section-header">
-			<p>Влез</p>
-		</header>
-		<div class="row">
-		<div class="col-lg-12 text-center">
-		<form action="">
-			<div class="form-group">
-				<label for="username">Потребителско име</label>
-				<input type="email" class="form-control" id="username"
-					   aria-describedby="username" placeholder="Потребителско име">
+		<div class="container" data-aos="fade-up">
+			<div class="section-header">
+				<p>Влез</p>
 			</div>
-			<br>
-			<div class="form-group">
-				<label for="password">Парола</label>
-				<input type="password" class="form-control" id="password" placeholder="Парола">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<form action="" method="POST">
+						<div class="form-group">
+							<label for="username">Потребителско име</label>
+							<input type="text" class="form-control" id="username" name="username" placeholder="Потребителско име">
+						</div><br>
+						<div class="form-group">
+							<label for="password">Парола</label>
+							<input type="password" name="pass" class="form-control" id="password" placeholder="Парола">
+						</div><br>
+						<input type="submit" name="submit" class="btn btn-primary" value="Влез">
+					</form>
+				</div>
 			</div>
-			<br>
-			<button type="submit" class="btn btn-primary">Влез</button>
-		</form>
 		</div>
-		</div>
-	</div>
-	</section>
+	</section/>
 </main>
 
 <?php
 
 include './partials/footer.php';
+=======
+if(isset($_POST['submit'])){
+	if(preg_match('/^[a-zA-Z0-9]+$/',$_POST['username']) &&  preg_match('/^[a-zA-Z0-9]+$/',$_POST['pass'])) {
+		$sql = "SELECT `name`,`password` FROM `users`";
+		$result = mysqli_query($conn, $sql);
+		$user = $_POST['username'];
+		$pass = $_POST['pass'];
+		while($row = mysqli_fetch_assoc($result))	{
+			if($user == $row['name'] && $pass == $row['password']){
+				$_SESSION['user'] = $user;
+				header('location: play.php');
+				break;
+			}else{
+				echo 'Грешно име или парола';
+			}
+		}
+	}else{
+		echo 'Моля въведете само букви и цифри';
+	}
+}
+	
+    include './partials/footer.php';
+    include './partials/scripts.php';
+?>
+
