@@ -2,6 +2,11 @@
 
 if ($_SESSION['click_count'] == 2) {
 	$_SESSION['current_gameground_position'] += 1;
+
+	$_SESSION['current_gameground_position'] += $_SESSION['starting_point'];
+	if ($_SESSION['current_gameground_position'] > 11) {
+		$_SESSION['current_gameground_position'] -= 12;
+	}
 }
 
 $position = $_SESSION['current_gameground_position'];

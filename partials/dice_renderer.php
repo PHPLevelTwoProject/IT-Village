@@ -56,16 +56,19 @@ if ($random_dice_number == 6) { ?>
     <br><br>
 <?php }
 
-if ($_SESSION['random_dice_number'] == 0 ) {
-	$_SESSION['random_dice_number'] = rand(1, 6);
-	$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
-}
-else if ($_SESSION['random_dice_number'] == -1 ) {
-	$_SESSION['random_dice_number'] +=1;
-}
-else {
-	$_SESSION['random_dice_number'] = rand(1, 6);
-	$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
+if (!$_SESSION['has_to_skip_two_rounds']) {
+	if ($_SESSION['random_dice_number'] == 0) {
+		$_SESSION['random_dice_number'] = rand(1, 6);
+		$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
+	}
+	else if ($_SESSION['random_dice_number'] == -1) {
+		$_SESSION['random_dice_number'] += 1;
+	}
+	else {
+		$_SESSION['random_dice_number'] = rand(1, 6);
+		$_SESSION['current_gameground_position'] += $_SESSION['random_dice_number'];
+	}
+
 }
 
 //if ($_SESSION['random_dice_number'] > 0) {

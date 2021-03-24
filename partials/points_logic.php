@@ -1,40 +1,5 @@
 <?php
 
-
-if (!isset($_SESSION['user_points'])) {
-	$_SESSION['user_points'] = 50;
-}
-
-
-
-if (!isset($_SESSION['user_has_lost_because_of_money'])) {
-	$_SESSION['user_has_lost_because_of_money'] = false;
-}
-if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
-	$_SESSION['user_has_lost_because_of_turns'] = false;
-}
-
-if (!isset($_SESSION['motels_bought'])) {
-	$_SESSION['motels_bought'] = 0;
-}
-if (!isset($_SESSION['turns_count'])) {
-	// make this to be the number drawn on first dice roll
-	$_SESSION['turns_count'] = 0;
-}
-if (!isset($_SESSION['has_to_skip_two_rounds'])) {
-	$_SESSION['has_to_skip_two_rounds'] = false;
-}
-if (!isset($_SESSION['skipped_rounds_count'])) {
-	$_SESSION['skipped_rounds_count'] = 0;
-}
-
-if (!isset($_SESSION['user_has_won_because_of_vso'])) {
-	$_SESSION['user_has_won_because_of_vso'] = false;
-}
-if (!isset($_SESSION['user_has_won_because_of_motels'])) {
-	$_SESSION['user_has_won_because_of_motels'] = false;
-}
-
 /*
  * Wi-Fi кръчма - P - Трябва да си купите един Cloud Коктейл - -5 монети - няколко
  * Wi-Fi мотел - I - Много
@@ -54,26 +19,26 @@ if (!isset($_SESSION['user_has_won_because_of_motels'])) {
 //       => Freelance Project => Freelance Project => Wi-Fi-Motel => VSO
 //       => Wi-Fi-Bar => Go to First Position
 
-
-
-$points = [
-	"Wi-Fi-Bar" => "-5",
-	"Wi-Fi-Motel-1" => "-100",
-	"Wi-Fi-Motel-2" => "-10",
-	"Freelance-Project" => "+20",
-	"Storm" => "skip-2-rounds",
-	"Super-PHP" => "*10",
-	"VSO" => "win-the-game",
-];
+//$points = [
+//	"Wi-Fi-Bar" => "-5 money",
+//	"Wi-Fi-Motel-1" => "-100 money",
+//	"Wi-Fi-Motel-2" => "-10 money",
+//	"Freelance-Project" => "+20 money",
+//	"Storm" => "skip 2 rounds money",
+//	"Super-PHP" => "* 10",
+//	"VSO" => "win the game",
+//];
 
 //could give bugs
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
+	$_SESSION['turns_count'] -= 1;
+
 	// if he has to skip position we don't move him
 	if ($_SESSION['has_to_skip_two_rounds'] == true) {
 		// increment skipped rounds count to keep track of them
 		$_SESSION['skipped_rounds_count'] += 1;
 		// if he has already skipped two rounds, free him
-		if ($_SESSION['skipped_rounds_count'] == 1) {
+		if ($_SESSION['skipped_rounds_count'] == 2) {
 			$_SESSION['has_to_skip_two_rounds'] = false;
 		}
 		// explanation - suppose he steps at number 1 and is storm
@@ -81,7 +46,6 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		// => he comes and we increment skipped count to 1
 		// => he comes a second time (because of the bool) and his count is 1, but this is his second round skipped,
 		//    meaning we have to free him, by setting the bool to false
-
 	}
 	else {
 		if (isset($position) && $position == 0) { // Bar
@@ -114,13 +78,13 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		else if (isset($position) && $position == 9) { // Motel
 			motel();
 		}
-//		else if (isset($position) && $position == 10) { // VSO, already handeled logic
+//		else if (isset($position) && $position == 10) { // VSO, already handled logic
 //			win_game();
 //		}
 		else if (isset($position) && $position == 11) { // bar
 			bar();
 		}
-		
+
 		// always check the state
 		check_if_game_is_lost_or_won_and_take_action();
 	}
@@ -152,7 +116,7 @@ function super_php() {
 }
 
 // drinking in the bar
-function bar(){
+function bar() {
 	$_SESSION['user_points'] -= 5;
 }
 
@@ -161,42 +125,38 @@ function freelance(){
 	$_SESSION['user_points'] += 20;
 }
 
-// if he is here - he has won the game
-//function win_game() {
-//	// save his score to db (name, score, date of game played)
-//	// set has won to true, so in the template we render "You won! Score: xyz"
-//	$_SESSION['user_has_won_because_of_vso'] = true;
-//}
-
 // game ends when either:
 // - insufficient money
 // - bought every single motel
 // - no more turns
 // - steps on VSO field - already handled by win_game()
 function check_if_game_is_lost_or_won_and_take_action() {
-//	if ($_SESSION['user_has_won_because_of_vso']) {
-//		header('Location: won.php');
-//	}
-
 	if ($_SESSION['user_points'] <= 0) {
 		// he is lost because of money, set that value to true and return
 		$_SESSION['user_has_lost_because_of_money'] = true;
-		return;
+		header('Location: lost.php');
 	}
 	if ($_SESSION['turns_count'] == 0) {
 		// he is lost because of insufficient turns, set that value to true and return,
 		$_SESSION['user_has_lost_because_of_turns'] = true;
-		return;
+		header('Location: lost.php');
 	}
 
 	if ($_SESSION['current_gameground_position'] == 10) {
 		// he has the support of vso => wins
 		$_SESSION['user_has_won_because_of_vso'] = true;
-		return;
+		header('Location: won.php');
 	}
 	if ($_SESSION['motels_bought'] == 3) {
 		// he bought all motels -> he wins, write to database and render result
 		$_SESSION['user_has_won_because_of_motels'] = true;
-		return;
+		header('Location: won.php');
 	}
 }
+
+// if he is here - he has won the game
+//function win_game() {
+//	// save his score to db (name, score, date of game played)
+//	// set has won to true, so in the template we render "You won! Score: xyz"
+//	$_SESSION['user_has_won_because_of_vso'] = true;
+//}
