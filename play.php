@@ -40,14 +40,19 @@ include './partials/head.php';
             <?php
 			if ($_SESSION['click_count'] == 0) {
 			    echo "<h1>Готови ли сте?</h1>";
-				$text_to_render = "Започни играта";
+			    echo "<h1>Изтеглете начална позиция и броя на ходовете си.</h1>";
+				$text_to_render = "Изтегли";
             }
             else if ($_SESSION['click_count'] == 1) {
+				echo "<h1>Начална позиция: " . $_SESSION['starting_point'] . "</h1>";
+				echo "<h1>Брой на ходовете " . $_SESSION['turns_count'] . " хода.</h1>";
 				echo "<h1>Хвърлете зарчето, за да започнете.</h1>";
 				$text_to_render = "Хвърли зарчето";
 			}
 			else {
-				echo "<h1>Вашият резултат е: " . $_SESSION['user_points'] . "</h1>";
+				echo "<h1>Вашият резултат е " . $_SESSION['user_points'] . " монети.</h1>";
+				echo "<h1>Закупили сте " . $_SESSION['motels_bought'] . " мотела.</h1>";
+				echo "<h1>Имате " . $_SESSION['turns_count'] . " хода.</h1>";
 				$text_to_render = "Хвърли зарчето";
 			}
             ?>
