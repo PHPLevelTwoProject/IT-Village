@@ -465,7 +465,7 @@
       return;
     }
 
-    found = document.querySelectorAll('script[src="' + url + '"]');
+    found = document.querySelectorAll('script[pages="' + url + '"]');
 
     if (found && found.length > 0) {
       if (isFunction(callback)) {
@@ -1804,7 +1804,7 @@
             }
 
             if (videoFile !== '') {
-              html += "<source src=\"".concat(videoFile, "\" type=\"video/").concat(key, "\">");
+              html += "<source pages=\"".concat(videoFile, "\" type=\"video/").concat(key, "\">");
             }
           }
         }

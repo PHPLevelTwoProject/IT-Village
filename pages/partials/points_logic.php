@@ -29,9 +29,10 @@
 //	"VSO" => "win the game",
 //];
 
-//could give bugs
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	$_SESSION['turns_count'] -= 1;
+
+	// to be implemented: penalty for being in the storm earlier - no money from the motels
 
 	// if he has to skip position we don't move him
 	if ($_SESSION['has_to_skip_two_rounds'] == true) {
@@ -39,12 +40,13 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		$_SESSION['skipped_rounds_count'] += 1;
 		// if he has already skipped two rounds, free him
 		if ($_SESSION['skipped_rounds_count'] == 2) {
+			$_SESSION['skipped_rounds_count'] = 0;
 			$_SESSION['has_to_skip_two_rounds'] = false;
 		}
 		// explanation - suppose he steps at number 1 and is storm
-		// => we set should skip to true
+		// => we set "should skip 2 rounds" to true
 		// => he comes and we increment skipped count to 1
-		// => he comes a second time (because of the bool) and his count is 1, but this is his second round skipped,
+		// => he comes a second time (because of the boolean) and his count is 1, but this is his second round skipped,
 		//    meaning we have to free him, by setting the bool to false
 	}
 	else {
@@ -78,16 +80,16 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		else if (isset($position) && $position == 9) { // Motel
 			motel();
 		}
-//		else if (isset($position) && $position == 10) { // VSO, already handled logic
+//		else if (isset($position) && $position == 10) { // VSO, already handled logic by the function below
 //			win_game();
 //		}
 		else if (isset($position) && $position == 11) { // bar
 			bar();
 		}
-
-		// always check the state
-		check_if_game_is_lost_or_won_and_take_action();
 	}
+
+	// always check the state
+	check_if_game_is_lost_or_won_and_take_action();
 }
 
 // if he steps on motel and has money => buy it and decrement money; else => pay the tax
@@ -110,26 +112,27 @@ function motel() {
 	}
 }
 
-// super php
+// super php multiplies points by 10
 function super_php() {
 	$_SESSION['user_points'] *= 10;
 }
 
-// drinking in the bar
+// drinking in the bar decreases points by 5
 function bar() {
 	$_SESSION['user_points'] -= 5;
 }
 
-// freelancing
+// freelancing gives plus 20 points
 function freelance(){
 	$_SESSION['user_points'] += 20;
 }
 
-// game ends when either:
+// game ends when player has:
 // - insufficient money
 // - bought every single motel
 // - no more turns
-// - steps on VSO field - already handled by win_game()
+// - stepped on VSO field - already handled by win_game()
+// to be implemented: save his score to db (name, score, date of game played)
 function check_if_game_is_lost_or_won_and_take_action() {
 	if ($_SESSION['user_points'] <= 0) {
 		// he is lost because of money, set that value to true and return
@@ -154,9 +157,3 @@ function check_if_game_is_lost_or_won_and_take_action() {
 	}
 }
 
-// if he is here - he has won the game
-//function win_game() {
-//	// save his score to db (name, score, date of game played)
-//	// set has won to true, so in the template we render "You won! Score: xyz"
-//	$_SESSION['user_has_won_because_of_vso'] = true;
-//}

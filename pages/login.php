@@ -56,3 +56,5 @@ if (isset($_POST['submit'])) {
 }
 
 include './partials/footer.php';
+
+?>

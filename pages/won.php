@@ -14,9 +14,9 @@ include 'partials/head.php';
 		</a>
 		<nav id="navbar" class="navbar">
 			<ul>
-                <li><a class="nav-link" href="./index.php">Начало</a></li>
-                <li><a class="nav-link" href="./play.php">Играй</a></li>
-				<li><a class="nav-link" href="./statistics.php">Статистики</a></li>
+                <li><a class="nav-link" href="index.php">Начало</a></li>
+                <li><a class="nav-link" href="play.php">Играй</a></li>
+				<li><a class="nav-link" href="statistics.php">Статистики</a></li>
 			</ul>
 			<i class="bi bi-list mobile-nav-toggle"></i>
 		</nav>
@@ -34,16 +34,16 @@ include 'partials/head.php';
         <div class="" data-aos="zoom-out" data-aos-delay="200">
             <?php if (!$_SESSION['user_has_won_because_of_vso'] && !$_SESSION['user_has_won_because_of_motels']) { ?>
                 <h2>Не е яко да мамиш! Не си спечелил наистина. :)</h2>
-                <a href="./partials/reset.php" class="btn btn-outline-success">Играй!</a>
+                <a href="partials/reset.php" class="btn btn-outline-success">Играй!</a>
             <?php } else if ($_SESSION['user_has_won_because_of_motels']) { ?>
                 <h2>Вие спечелихте играта, понеже притежавате всички мотели!</h2>
                 <h2>Имате резултат от <?= $_SESSION['user_points'] ?> монети.</h2>
                 <h2>Брой мотели: <?= $_SESSION['motels_bought'] ?>.</h2>
-                <a href="./partials/reset.php" class="btn btn-outline-success">Играй!</a>
+                <a href="partials/reset.php" class="btn btn-outline-success">Играй!</a>
 			<?php } else if ($_SESSION['user_has_won_because_of_vso']) { ?>
                 <h2>Вие спечелихте играта с подкрепата на Враца Софтуер Общество!</h2>
                 <h2>Имате резултат от <?= $_SESSION['user_points'] ?> монети.</h2>
-                <a href="./partials/reset.php" class="btn btn-outline-success">Играй пак!</a>
+                <a href="partials/reset.php" class="btn btn-outline-success">Играй пак!</a>
             <?php } ?>
         </div>
         </div>
@@ -77,7 +77,9 @@ include 'partials/head.php';
 
 <!-- ======= End PlaceHolders Section ======= -->
 
-
 <?php
 
 include './partials/footer.php';
+
+?>
+

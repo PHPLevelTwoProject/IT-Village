@@ -1,5 +1,7 @@
 <?php
-    include './partials/head.php';
+
+include './partials/head.php';
+
 ?>
 
 <body>
@@ -12,8 +14,8 @@
         </a>
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link" href="./index.php">Начало</a></li>
-                <li><a class="nav-link active" href="./login.php">Влез</a></li>
+                <li><a class="nav-link" href="index.php">Начало</a></li>
+                <li><a class="nav-link active" href="login.php">Влез</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -66,3 +68,5 @@
 <?php
 
 include './partials/footer.php';
+
+?>

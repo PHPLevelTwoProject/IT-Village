@@ -14,9 +14,9 @@ include 'partials/head.php';
 		</a>
 		<nav id="navbar" class="navbar">
 			<ul>
-				<li><a class="nav-link" href="./index.php">Начало</a></li>
-				<li><a class="nav-link" href="./play.php">Играй</a></li>
-				<li><a class="nav-link" href="./statistics.php">Статистики</a></li>
+				<li><a class="nav-link" href="index.php">Начало</a></li>
+				<li><a class="nav-link" href="play.php">Играй</a></li>
+				<li><a class="nav-link" href="statistics.php">Статистики</a></li>
 			</ul>
 			<i class="bi bi-list mobile-nav-toggle"></i>
 		</nav>
@@ -35,10 +35,10 @@ include 'partials/head.php';
 				<?php if ($_SESSION['user_has_lost_because_of_turns']) { ?>
 					<h2>Загубихте, защото останахте с 0 хода.</h2>
 					<h2>Имате <?= $_SESSION['user_points'] ?> монети.</h2>
-					<a href="./partials/reset.php" class="btn btn-outline-success">Играй!</a>
+					<a href="partials/reset.php" class="btn btn-outline-success">Играй!</a>
 				<?php } else if ($_SESSION['user_has_lost_because_of_money']) { ?>
 					<h2>Загубихте, защото останахте с 0 монети.</h2>
-					<a href="./partials/reset.php" class="btn btn-outline-success">Играй!</a>
+					<a href="partials/reset.php" class="btn btn-outline-success">Играй!</a>
 				<?php } ?>
 			</div>
 			</div>
@@ -76,3 +76,5 @@ include 'partials/head.php';
 <?php
 
 include './partials/footer.php';
+
+?>

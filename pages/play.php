@@ -14,8 +14,8 @@ include './partials/head.php';
         </a>
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link" href="./index.php">Начало</a></li>
-                <li><a class="nav-link" href="./statistics.php">Статистики</a></li>
+                <li><a class="nav-link" href="index.php">Начало</a></li>
+                <li><a class="nav-link" href="statistics.php">Статистики</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
@@ -45,18 +45,18 @@ include './partials/head.php';
             }
             else if ($_SESSION['click_count'] == 1) {
 				echo "<h1>Начална позиция: " . $_SESSION['starting_point'] . "</h1>";
-				echo "<h1>Брой на ходовете " . $_SESSION['turns_count'] . " хода.</h1>";
+				echo "<h1>Брой на ходовете: " . $_SESSION['turns_count'] . "</h1>";
 				echo "<h1>Хвърлете зарчето, за да започнете.</h1>";
 				$text_to_render = "Хвърли зарчето";
 			}
 			else {
 				echo "<h1>Вашият резултат е " . $_SESSION['user_points'] . " монети.</h1>";
-				echo "<h1>Закупили сте " . $_SESSION['motels_bought'] . " мотела.</h1>";
 				echo "<h1>Имате " . $_SESSION['turns_count'] . " хода.</h1>";
+				echo "<h1>Закупили сте " . $_SESSION['motels_bought'] . " мотела.</h1>";
 				$text_to_render = "Хвърли зарчето";
 			}
             ?>
-            <a href="./play.php" class="btn btn-outline-primary"><?= $text_to_render ?></a>
+            <a href="play.php" class="btn btn-outline-primary"><?= $text_to_render ?></a>
         </form>
         <br>
         <div class="" data-aos="zoom-out" data-aos-delay="200">
@@ -66,12 +66,8 @@ include './partials/head.php';
         </div>
         <div class="" data-aos="zoom-out" data-aos-delay="200">
             <?php
-			if ($_SESSION['click_count'] == 0) {
-            }
-			else if ($_SESSION['click_count'] == 1) {
-			}
-			else {
-                echo "<a href=\"./partials/reset.php\" class=\"btn btn-outline-danger\">Занули резултат</a>";
+			if ($_SESSION['click_count'] != 0 && $_SESSION['click_count'] != 1){
+                echo "<a href='./partials/reset.php' class='btn btn-outline-danger'>Занули резултат</a>";
             }
             ?>
         </div>
@@ -112,3 +108,5 @@ include './partials/head.php';
 <?php
 
 include './partials/footer.php';
+
+?>
