@@ -1,9 +1,13 @@
 <?php
 
 if ($_SESSION['click_count'] == 2) {
+    // adding a one so it works right
 	$_SESSION['current_gameground_position'] += 1;
 
+	// increment the player's position with the starting point
 	$_SESSION['current_gameground_position'] += $_SESSION['starting_point'];
+
+	// if player's position is out of bounds - correct it
 	if ($_SESSION['current_gameground_position'] > 11) {
 		$_SESSION['current_gameground_position'] -= 12;
 	}
