@@ -63,9 +63,3 @@ if (!isset($_SESSION['user_has_lost_because_of_money'])) {
 if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
 	$_SESSION['user_has_lost_because_of_turns'] = false;
 }
-
-//?
-// if position is out of bounds, lower it to correct value
-if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] > 11) {
-	$_SESSION['current_gameground_position'] -= 12;
-}

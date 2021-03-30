@@ -82,4 +82,3 @@ include 'partials/head.php';
 include './partials/footer.php';
 
 ?>
-
