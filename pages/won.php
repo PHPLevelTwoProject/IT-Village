@@ -1,6 +1,9 @@
 <?php
 
-include 'partials/head.php';
+/**
+ * @var object $connection
+ */
+include 'partials/header.php';
 
 ?>
 
@@ -51,31 +54,6 @@ include 'partials/head.php';
     </div>
 	</section>
 </main>
-
-<!-- ======= PlaceHolders Section ======= -->
-
-<section id="description" class="description">
-	<div class="container" data-aos="fade-up">
-		<header class="section-header">
-		</header>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-			</div>
-		</div>
-	</div>
-</section>
-<section id="description" class="description">
-	<div class="container" data-aos="fade-up">
-		<header class="section-header">
-		</header>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- ======= End PlaceHolders Section ======= -->
 
 <?php
 

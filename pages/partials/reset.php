@@ -1,6 +1,27 @@
 <?php
 
 session_start();
-session_destroy();
+
+// reset variables
+unset($_SESSION['user_points']);
+unset($_SESSION['click_count'] );
+unset($_SESSION['random_dice_number'] );
+unset($_SESSION['current_gameground_position'] );
+
+unset($_SESSION['starting_point']);
+unset($_SESSION['motels_bought'] );
+
+unset($_SESSION['turns_count']);
+unset($_SESSION['has_to_skip_two_rounds']);
+unset($_SESSION['skipped_rounds_count'] );
+
+unset($_SESSION['user_has_won_because_of_vso'] );
+unset($_SESSION['user_has_won_because_of_motels'] );
+
+unset($_SESSION['user_has_lost_because_of_money'] );
+unset($_SESSION['user_has_lost_because_of_turns']);
+
+$_SESSION['should_not_render_register'] = true;
+$_SESSION['should_not_render_login'] = true;
 
 header('Location: ./../play.php');
