@@ -1,5 +1,6 @@
 <?php
 
+
 $random_dice_number = $_SESSION['random_dice_number'];
 
 // legacy code
@@ -13,22 +14,9 @@ $random_dice_number = $_SESSION['random_dice_number'];
 //}
 
 // debugging and testing purposes, do not delete for now
-//if ($random_dice_number == -1) {
-//	echo "Dice number is -1 <br>";
-//}
-//
-//else if ($random_dice_number == 0) {
-//	echo "Dice number is 0 <br>";
-//	echo "<br>";
-//	echo "Click count is " . $_SESSION['click_count']; ?>
-<!--	<img src="./images/dice/dice_6.png" alt =""><br><br>-->
-<!--    --><?php
-//}
-//else {
-//    echo "Dice number is " . $random_dice_number;
-//    echo "<br>";
-//    echo "Click count is " . $_SESSION['click_count'];
-//}
+echo "Dice number is " . $random_dice_number;
+echo "<br>";
+echo "Click count is " . $_SESSION['click_count'];
 
 // conditional rendering
 if ($random_dice_number == 1) { ?>
