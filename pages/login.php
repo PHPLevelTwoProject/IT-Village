@@ -83,7 +83,6 @@ if (isset($_POST['submit'])) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			if ($user == $row['username'] && $password_hashed == $row['password']) {
 				$_SESSION['user_id'] = $row['user_id'];
-
 				$_SESSION['user'] = $_POST['username'];
 				$_SESSION['should_not_render_login'] = true;
 			}
