@@ -1,8 +1,27 @@
 <?php
 
-include './partials/header.php';
+include './partials/head.php';
 
 ?>
+
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="index.php" class="logo d-flex align-items-center">
+            <img src="assets/img/village-logo.png" alt="">
+            <span>IT Village</span>
+        </a>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link" href="index.php">Начало</a></li>
+                <li><a class="nav-link" href="statistics.php">Статистики</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </div>
+</header>
+<!-- ======= End Header ======= -->
 
 <main id="main">
 <section id="project" class="project">
