@@ -77,6 +77,6 @@ if (!isset($_SESSION['user'])) {
 	$_SESSION['user'] = "";
 }
 
-if (!isset($_SESSION['user_id'])) {
+if (!$_SESSION['user_id']) {
 	$_SESSION['user_id'] = 0;
 }
