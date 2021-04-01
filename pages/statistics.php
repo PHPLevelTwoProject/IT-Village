@@ -1,31 +1,6 @@
 <?php
-
-include './partials/head.php';
-
+    include './partials/header.php';
 ?>
-
-<body>
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-        <a href="index.php" class="logo d-flex align-items-center">
-            <img src="assets/img/village-logo.png" alt="">
-            <span>IT Village</span>
-        </a>
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="index.php">Начало</a></li>
-                <li><a class="nav-link" href="index.php#description">Описание</a></li>
-                <li><a class="nav-link" href="rules.php">Правила</a></li>
-                <li><a class="nav-link" href="play.php">Играй</a></li>
-                <li><a class="nav-link" href="login.php">Влез</a></li>
-                <li><a class="nav-link" href="register.php">Регистрирай се</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-    </div>
-</header>
-<!-- ======= End Header ======= -->
 
 <main id="main">
     <section class="project">
@@ -57,7 +32,7 @@ include './partials/head.php';
 </main>
 
 <!-- ======= PlaceHolders Section ======= -->
-<section class="description" id="description">
+<section class="description">
     <div class="container" data-aos="fade-up">
         <header class="section-header">
         </header>
@@ -67,7 +42,7 @@ include './partials/head.php';
         </div>
     </div>
 </section>
-<section class="description-second">
+<section class="description">
     <div class="container" data-aos="fade-up">
         <header class="section-header">
         </header>
@@ -82,5 +57,3 @@ include './partials/head.php';
 <?php
 
 include './partials/footer.php';
-
-?>
