@@ -18,6 +18,10 @@
                         Линк
                     </a>
                 </h3>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
             </div>
         </div>
@@ -26,8 +30,31 @@
     </section>
 </main>
 
+<!-- ======= PlaceHolders Section ======= -->
+
+<section class="description">
+    <div class="container" data-aos="fade-up">
+        <header class="section-header">
+        </header>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="description">
+    <div class="container" data-aos="fade-up">
+        <header class="section-header">
+        </header>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======= End PlaceHolders Section ======= -->
+
 <?php
 
 include './partials/footer.php';
-
-?>

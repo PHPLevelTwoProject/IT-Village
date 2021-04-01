@@ -29,11 +29,6 @@
 //	"VSO" => "win the game",
 //];
 
-/**
- * @var object $connection
- */
-include 'connect_db.php';
-
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	$_SESSION['turns_count'] -= 1;
 
@@ -140,51 +135,25 @@ function freelance(){
 // to be implemented: save his score to db (name, score, date of game played)
 function check_if_game_is_lost_or_won_and_take_action() {
 	if ($_SESSION['user_points'] <= 0) {
-		// he has lost because of money, set that value to true and save
-		save_score_to_database(false);
+		// he is lost because of money, set that value to true and return
 		$_SESSION['user_has_lost_because_of_money'] = true;
 		header('Location: lost.php');
 	}
 	if ($_SESSION['turns_count'] == 0) {
-		// he is lost because of insufficient turns, set that value to true and save
-		save_score_to_database(false);
+		// he is lost because of insufficient turns, set that value to true and return,
 		$_SESSION['user_has_lost_because_of_turns'] = true;
 		header('Location: lost.php');
 	}
 
 	if ($_SESSION['current_gameground_position'] == 10) {
 		// he has the support of vso => wins
-		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_vso'] = true;
 		header('Location: won.php');
 	}
 	if ($_SESSION['motels_bought'] == 3) {
 		// he bought all motels -> he wins, write to database and render result
-		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_motels'] = true;
 		header('Location: won.php');
-	}
-}
-
-function save_score_to_database($is_win) {
-	$user_id = $_SESSION['user_id'];
-	$score = $_SESSION['user_points'];
-	$date = date("Y-m-d");
-
-	// insert a win or a lose to that user
-	$add_score = "INSERT INTO `itvillage`.`scores` (`user_id`, `score`, `is_win`,`date_created` ) VALUES ($user_id, $score, '$is_win', '$date')";
-	$add_score_result = mysqli_query($connection, $add_score);
-
-	// select user's win count and increment it if it's a win
-	if ($is_win) {
-		$select_user_win_count = "SELECT `wins_count` FROM `itvillage`.`users` WHERE user_id = $user_id";
-		$select_user_win_count_result = mysqli_query($connection, $select_user_win_count);
-
-		$count = mysqli_fetch_assoc($select_user_win_count_result);
-		$count++;
-
-		$increment_wins_count = "UPDATE `itvillage`.`users` SET `wins_count` = $count WHERE user_id = 46";
-		$increment_wins_count_result = mysqli_query($connection, $select_user_win_count);
 	}
 }
 

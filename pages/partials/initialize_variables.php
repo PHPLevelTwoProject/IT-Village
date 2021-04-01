@@ -63,20 +63,3 @@ if (!isset($_SESSION['user_has_lost_because_of_money'])) {
 if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
 	$_SESSION['user_has_lost_because_of_turns'] = false;
 }
-
-//login logic
-if (!isset($_SESSION['should_not_render_register'])) {
-	$_SESSION['should_not_render_register'] = false;
-}
-
-if (!isset($_SESSION['should_not_render_login'])) {
-	$_SESSION['should_not_render_login'] = false;
-}
-
-if (!isset($_SESSION['user'])) {
-	$_SESSION['user'] = "";
-}
-
-if (!$_SESSION['user_id']) {
-	$_SESSION['user_id'] = 0;
-}
