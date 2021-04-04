@@ -2,10 +2,10 @@
 
 if (getenv('environment') === 'production') {
 	$connection = mysqli_connect(
-		getenv("hostname"),
-		getenv("username"),
-		getenv("password"),
-		getenv("database")
+		$_ENV["hostname"],
+		$_ENV["username"],
+		$_ENV["password"],
+		$_ENV["database"],
 	);
 }
 else {
