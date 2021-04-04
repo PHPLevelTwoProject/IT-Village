@@ -14,6 +14,7 @@ include './partials/header.php';
                 <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 text-center">
                     <div class="section-header padded-top">
                         <p>Регистритай се</p>
+                        <hr/>
                     </div>
                     <form action="" method="POST">
                         <div class="form-group">

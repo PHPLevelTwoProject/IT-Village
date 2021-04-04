@@ -2,29 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f301de-ae39-4a6a-8265-15801f6580ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/lost.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/lost.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/connect_db.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/connect_db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/dice_renderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/dice_renderer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/footer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/partials/ground_renderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/ground_renderer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/head.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/partials/initialize_variables.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/initialize_variables.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/partials/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/logout.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/partials/points_logic.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/points_logic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/partials/reset.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/partials/reset.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/play.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/play.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/register.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/rules.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rules.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/statistics.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/statistics.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/won.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/won.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +22,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="e96eb417-a720-44d8-be94-e2ccd25fb944" name="localhost" />
+    </servers>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -66,7 +57,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617528760334</updated>
-      <workItem from="1617528819358" duration="6263000" />
+      <workItem from="1617528819358" duration="11593000" />
     </task>
     <servers />
   </component>
@@ -83,5 +74,96 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>166</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>168</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>169</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>170</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>172</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>173</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>174</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>176</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>178</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>181</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>184</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>188</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>189</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>191</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>192</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>195</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/pages/partials/points_logic.php</url>
+          <line>196</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -35,6 +35,7 @@ include 'partials/header.php';
         <div id="description" class="container" data-aos="fade-up">
             <header class="section-header">
                 <p>Описание</p>
+                <hr>
             </header>
             <div class="row">
                 <div class="col-lg-12 text-center">

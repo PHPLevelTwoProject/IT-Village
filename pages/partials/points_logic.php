@@ -29,6 +29,7 @@
 //	"VSO" => "win the game",
 //];
 
+
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	$_SESSION['turns_count'] -= 1;
 
@@ -163,25 +164,36 @@ function check_if_game_is_lost_or_won_and_take_action() {
 
 // not working properly
 function save_score_to_database($is_win) {
-	$user_id = $_SESSION['user_id'];
+	$connection = mysqli_connect('127.0.0.1', 'root', '', 'itvillage');
+
+	$user = $_SESSION['user'];
 	$score = $_SESSION['user_points'];
 	$date = date("Y-m-d");
 
+	$select_user = "SELECT `user_id` FROM `itvillage`.`users` WHERE `username` = '$user'";
+	$select_user_result = mysqli_query($connection, $select_user);
+	$user_with_id = mysqli_fetch_assoc($select_user_result);
+
+	$_SESSION["user_id"] = $user_with_id["user_id"];
+
+	$user_id = $_SESSION["user_id"];
+
 	// insert a win or a lose to that user
-	$add_score = "INSERT INTO `itvillage`.`scores` (`user_id`, `score`, `is_win`,`date_created`) 
+	$add_score = "INSERT INTO `itvillage`.`scores` (`user_id`, `score`, `is_win`, `date_created`) 
 				  VALUES ($user_id, $score, '$is_win', '$date')";
 
 	$add_score_result = mysqli_query($connection, $add_score);
 
 	// select user's win count and increment it if it's a win
 	if ($is_win) {
-		$select_user_win_count = "SELECT `wins_count` FROM `itvillage`.`users` WHERE user_id = $user_id";
+		$select_user_win_count = "SELECT `wins_count` FROM `itvillage`.`users` WHERE `user_id` = '$user_id'";
 		$select_user_win_count_result = mysqli_query($connection, $select_user_win_count);
 
 		$count = mysqli_fetch_assoc($select_user_win_count_result);
-		$count++;
+		$count["wins_count"] = (int)$count["wins_count"] + 1;
 
-		$increment_wins_count = "UPDATE `itvillage`.`users` SET `wins_count` = $count WHERE user_id = 46";
-		$increment_wins_count_result = mysqli_query($connection, $select_user_win_count);
+		$wins_count = $count["wins_count"];
+		$increment_wins_count = "UPDATE `itvillage`.`users` SET `wins_count` = '$wins_count' WHERE `user_id` = '$user_id'";
+		$increment_wins_count_result = mysqli_query($connection, $increment_wins_count);
 	}
 }
