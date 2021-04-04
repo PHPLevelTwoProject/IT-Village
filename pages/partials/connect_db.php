@@ -17,11 +17,13 @@ else {
 	);
 }
 
-
 if (!$connection) {
 	echo getenv("hostname");
+	echo "<br>";
 	echo getenv("username");
+	echo "<br>";
 	echo getenv("password");
+	echo "<br>";
 	echo getenv("database");
 	die("Connection failed. " . mysqli_connect_error() . " - " . mysqli_connect_errno());
 } else {
