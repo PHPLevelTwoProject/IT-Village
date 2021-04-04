@@ -1,6 +1,6 @@
 <?php
 
-if (getenv('environment') === 'production') {
+if (getenv('environment') == 'production') {
 	$hostname = getenv('hostname');
 	$username = getenv('username');
 	$password = getenv('password');
