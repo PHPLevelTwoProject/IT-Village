@@ -1,11 +1,16 @@
 <?php
 
 if (getenv('environment') === 'production') {
+	$hostname = getenv('hostname');
+	$username = getenv('username');
+	$password = getenv('password');
+	$database = getenv('database');
+
 	$connection = mysqli_connect(
-		$_ENV["hostname"],
-		$_ENV["username"],
-		$_ENV["password"],
-		$_ENV["database"],
+		$hostname,
+		$username,
+		$password,
+		$database
 	);
 }
 else {
