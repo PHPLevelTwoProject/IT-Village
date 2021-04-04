@@ -63,6 +63,9 @@ if (!isset($_SESSION['user_has_lost_because_of_money'])) {
 if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
 	$_SESSION['user_has_lost_because_of_turns'] = false;
 }
+if (!isset($_SESSION['has_recently_stepped_on_storm'])) {
+	$_SESSION['has_recently_stepped_on_storm'] = false;
+}
 
 // login logic
 //if (!isset($_SESSION['user'])) {

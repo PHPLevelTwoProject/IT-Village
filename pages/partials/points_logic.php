@@ -33,8 +33,6 @@
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	$_SESSION['turns_count'] -= 1;
 
-	// to be implemented: penalty for being in the storm earlier - no money from the motels
-
 	// if he has to skip position we don't move him
 	if ($_SESSION['has_to_skip_two_rounds'] == true) {
 		// increment skipped rounds count to keep track of them
@@ -44,6 +42,10 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 			$_SESSION['skipped_rounds_count'] = 0;
 			$_SESSION['has_to_skip_two_rounds'] = false;
 		}
+
+		// he has stepped on storm recently
+		$_SESSION['has_recently_stepped_on_storm'] = true;
+
 		// explanation - suppose he steps at number 1 and is storm
 		// => we set "should skip 2 rounds" to true
 		// => he comes and we increment skipped count to 1
@@ -61,7 +63,7 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 			freelance();
 		}
 		else if (isset($position) && $position == 3) { // Storm
-			$_SESSION['has_to_skip_two_rounds'] = true;
+			storm();
 		}
 		else if (isset($position) && $position == 4) { // Freelance Project
 			freelance();
@@ -93,18 +95,28 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 	check_if_game_is_lost_or_won_and_take_action();
 }
 
+// he stepped on storm :(
+function storm(){
+	$_SESSION['has_to_skip_two_rounds'] = true;
+}
+
 // if he steps on motel and has money => buy it and decrement money; else => pay the tax
 function motel() {
-	// is it okay to have 0 points for a millisecond?
 	// suppose he has 100 and buys the motel and then gains 20 - is this permitted
 	if ($_SESSION['user_points'] >= 100) {
 		// buy the motel with a price of 100
 		$_SESSION['user_points'] -= 100;
 
-		// for every motel bought - gain 20 money
-		$_SESSION['user_points'] += 20;
+		// if he has stepped on storm recently - now that is forgotten
+		if ($_SESSION['has_recently_stepped_on_storm']) {
+			$_SESSION['has_recently_stepped_on_storm'] = false;
+		}
+		else {
+			// for every motel bought - gain 20 money, if hasn't stepped on storm recently
+			$_SESSION['user_points'] += 20;
+		}
 
-		//increase motels bought count
+		// increase motels bought count
 		$_SESSION['motels_bought']  += 1;
 	}
 	else {
