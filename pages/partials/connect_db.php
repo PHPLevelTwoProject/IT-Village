@@ -19,7 +19,7 @@ else {
 
 
 if (!$connection) {
-	die('Connection failed. ' . mysqli_connect_error() . ' - ' . mysqli_connect_errno());
+	die('Connection failed. ' . mysqli_connect_error() . ' - ' . mysqli_connect_errno(). $connection);
 } else {
 	mysqli_set_charset($connection, "utf8");
 }
