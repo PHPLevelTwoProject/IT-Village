@@ -5,12 +5,14 @@ if (getenv('environment') == 'production') {
 	$username = getenv('username');
 	$password = getenv('password');
 	$database = getenv('database');
+	$CLEARDB_DATABASE_URL = getenv('CLEARDB_DATABASE_URL');
 
 	$connection = mysqli_connect(
-		$hostname,
-		$username,
-		$password,
-		$database
+		$CLEARDB_DATABASE_URL
+//		$hostname,
+//		$username,
+//		$password,
+//		$database
 	);
 }
 else {
