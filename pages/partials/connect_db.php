@@ -19,7 +19,12 @@ else {
 
 
 if (!$connection) {
-	die('Connection failed. ' . mysqli_connect_error() . ' - ' . mysqli_connect_errno(). $connection);
+	echo "$connection";
+	echo getenv('hostname');
+	echo getenv('username');
+	echo getenv('password');
+	echo getenv('database');
+	die('Connection failed. ' . mysqli_connect_error() . ' - ' . mysqli_connect_errno(). );
 } else {
 	mysqli_set_charset($connection, "utf8");
 }
