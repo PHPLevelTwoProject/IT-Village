@@ -73,3 +73,6 @@ db_export/itvillage.sql.zip
 .idea/dataSources.xml
 .idea/dataSources.xml
 *.xml
+
+# Custom
+vendor/
