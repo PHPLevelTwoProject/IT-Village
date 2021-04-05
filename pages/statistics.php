@@ -6,7 +6,7 @@
 include './partials/header.php';
 
 $get_user_scores_ordered_by_wins_count =
-    "SELECT u.username, s.date_created, s.score 
+    "SELECT u.username, s.date_created, s.score, s.is_win
      FROM itvillage.users AS u
      JOIN itvillage.scores s on s.user_id = u.user_id
      WHERE s.date_deleted is null AND u.date_deleted is null
@@ -36,15 +36,17 @@ $result = mysqli_query($connection, $get_user_scores_ordered_by_wins_count);
                                 echo "<td class='reduced-size-ten-percent'>#</td>";
                                 echo "<td class='reduced-size'>Потребителско име</td>";
                                 echo "<td class='reduced-size'>Дата на игра</td>";
-                                echo "<td class='reduced-size'>Резултат</td></tr>";
+							    echo "<td class='reduced-size'>Резултат</td>";
+							    echo "<td class='reduced-size'>Загуба/победа</td></tr>";
 
 							$counter = 1;
 							while ($row = mysqli_fetch_assoc($result)) {
 								$username = $row['username'];
 								$date_created = $row['date_created'];
 								$score =  $row['score'];
+								$is_win =  $row['is_win'];
 
-								echo "<tr><td>$counter</td><td>$username</td><td>$date_created</td><td>$score</td></tr>";
+								echo "<tr><td>$counter</td><td>$username</td><td>$date_created</td><td>$score</td><td>$is_win</td></tr>";
 								$counter++;
 							}
 							echo "</table>";

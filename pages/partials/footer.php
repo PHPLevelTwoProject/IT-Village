@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-<footer id="footer" class="footer fixed-bottom"">
+<footer id="footer" class="footer fixed-bottom">
 	<div class="copyright">
 		<div class="credits">
             2021. IT Village. Code by Toshko & Kris.

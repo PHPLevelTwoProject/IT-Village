@@ -1,4 +1,7 @@
 {
   "name": "toshko-and-kris/it-village",
-  "description": "a cool web game about developers and drinking!"
+  "description": "a cool web game about developers and drinking!",
+  "require": {
+    "ext-mysqli" : "*"
+  }
 }
