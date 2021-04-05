@@ -50,14 +50,19 @@ include './partials/header.php';
 if (isset($_POST['submit'])) {
 	$flag = 'check ok';
 	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
-        preg_match('/^[a-zA-Z0-9]+$/', $_POST['password']) &&
-        preg_match('/^[a-zA-Z0-9]+$/', $_POST['repeat_password'])) {
+		preg_match('/^[a-zA-Z0-9]+$/', $_POST['password']) &&
+		preg_match('/^[a-zA-Z0-9]+$/', $_POST['repeat_password'])) {
 
 		$user = $_POST['username'];
 		$pass = $_POST['password'];
 		$repeat_pass = $_POST['repeat_password'];
 
-		$sql = "SELECT `username`,`password` FROM `itvillage`.`users` WHERE `date_deleted` IS NULL";
+		if (getenv('environment') == 'production') {
+			$sql = "SELECT `username`,`password` FROM `heroku_6b647d0a28c075b`.`users` WHERE `date_deleted` IS NULL";
+		} else {
+			$sql = "SELECT `username`,`password` FROM `itvillage`.`users` WHERE `date_deleted` IS NULL";
+		}
+
 		$result = mysqli_query($connection, $sql);
 
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -81,8 +86,14 @@ if (isset($_POST['submit'])) {
 		// hashing uses one-way functions
 		$password_hashed = hash('sha512', $pass);
 
-		$add_sql = "INSERT INTO `itvillage`.`users`(`username`, `password`,`date_created` ) 
-                    VALUES ('$user', '$password_hashed', '$date')";
+		if (getenv('environment') == 'production') {
+			$add_sql = "INSERT INTO `heroku_6b647d0a28c075b`.`users`(`username`, `password`,`date_created` ) 
+                        VALUES ('$user', '$password_hashed', '$date')";
+		} else {
+			$add_sql = "INSERT INTO `itvillage`.`users`(`username`, `password`,`date_created` ) 
+                        VALUES ('$user', '$password_hashed', '$date')";
+		}
+
 		$add_result = mysqli_query($connection, $add_sql);
 
 		if ($add_result) {

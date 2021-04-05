@@ -29,7 +29,6 @@ include 'partials/header.php';
 	</section>
 </main>
 
-
 <?php
 
 include './partials/footer.php';

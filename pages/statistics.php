@@ -5,12 +5,22 @@
  */
 include './partials/header.php';
 
-$get_user_scores_ordered_by_wins_count =
-    "SELECT u.username, s.date_created, s.score, s.is_win
-     FROM itvillage.users AS u
-     JOIN itvillage.scores s on s.user_id = u.user_id
-     WHERE s.date_deleted is null AND u.date_deleted is null
-     ORDER BY u.wins_count DESC, s.score DESC";
+// if environment is production use remote database, else use local
+if (getenv('environment') == 'production') {
+	$get_user_scores_ordered_by_wins_count =
+		"SELECT u.username, s.date_created, s.score, s.is_win
+         FROM heroku_6b647d0a28c075b.users AS u
+         JOIN heroku_6b647d0a28c075b.scores s on s.user_id = u.user_id
+         WHERE s.date_deleted is null AND u.date_deleted is null
+         ORDER BY u.wins_count DESC, s.score DESC";
+} else {
+	$get_user_scores_ordered_by_wins_count =
+		"SELECT u.username, s.date_created, s.score, s.is_win
+         FROM itvillage.users AS u
+         JOIN itvillage.scores s on s.user_id = u.user_id
+         WHERE s.date_deleted is null AND u.date_deleted is null
+         ORDER BY u.wins_count DESC, s.score DESC";
+}
 
 $result = mysqli_query($connection, $get_user_scores_ordered_by_wins_count);
 

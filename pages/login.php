@@ -44,7 +44,13 @@ if (isset($_POST['submit'])) {
 	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
         preg_match('/^[a-zA-Z0-9]+$/', $_POST['password'])) {
 
-		$sql = "SELECT `username`,`password` FROM `itvillage`.`users` WHERE `date_deleted` IS NULL";
+	    // use remote database if the environment is production
+		if (getenv('environment') == 'production') {
+			$sql = "SELECT `username`,`password` FROM `heroku_6b647d0a28c075b`.`users` WHERE `date_deleted` IS NULL";
+		} else {
+			$sql = "SELECT `username`,`password` FROM `itvillage`.`users` WHERE `date_deleted` IS NULL";
+		}
+
 		$result = mysqli_query($connection, $sql);
 
 		$user = $_POST['username'];

@@ -1,20 +1,5 @@
 <?php
 
-
-//	$hostname = getenv('hostname');
-//	$username = getenv('username');
-//	$password = getenv('password');
-//	$database = getenv('database');
-//	$CLEARDB_DATABASE_URL = getenv('CLEARDB_DATABASE_URL');
-//
-//	$connection = mysqli_connect(
-//		$CLEARDB_DATABASE_URL
-//		$hostname,
-//		$username,
-//		$password,
-//		$database
-//	);
-
 if (getenv('environment') == 'production') {
 	//Get Heroku ClearDB connection information
 	$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
