@@ -174,15 +174,34 @@ function check_if_game_is_lost_or_won_and_take_action() {
 	}
 }
 
-// not working properly
 function save_score_to_database($is_win) {
-	$connection = mysqli_connect('127.0.0.1', 'root', '', 'itvillage');
-
 	$user = $_SESSION['user'];
 	$score = $_SESSION['user_points'];
 	$date = date("Y-m-d");
 
-	$select_user = "SELECT `user_id` FROM `itvillage`.`users` WHERE `username` = '$user'";
+	if (getenv('environment') == 'production') {
+		//Get Heroku ClearDB connection information
+		$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+		$cleardb_server = $cleardb_url["host"];
+		$cleardb_username = $cleardb_url["user"];
+		$cleardb_password = $cleardb_url["pass"];
+		$cleardb_db = substr($cleardb_url["path"],1);
+		$active_group = 'default';
+		$query_builder = TRUE;
+
+		// Connect to DB
+		$connection = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+	}
+	else {
+		$connection = mysqli_connect("127.0.0.1","root","","itvillage");
+	}
+
+	if (getenv('environment') == 'production') {
+		$select_user = "SELECT `user_id` FROM `heroku_6b647d0a28c075b`.`users` WHERE `username` = '$user'";
+	} else {
+		$select_user = "SELECT `user_id` FROM `itvillage`.`users` WHERE `username` = '$user'";
+	}
+
 	$select_user_result = mysqli_query($connection, $select_user);
 	$user_with_id = mysqli_fetch_assoc($select_user_result);
 
@@ -191,14 +210,24 @@ function save_score_to_database($is_win) {
 	$user_id = $_SESSION["user_id"];
 
 	// insert a win or a lose to that user
-	$add_score = "INSERT INTO `itvillage`.`scores` (`user_id`, `score`, `is_win`, `date_created`) 
-				  VALUES ($user_id, $score, '$is_win', '$date')";
+	if (getenv('environment') == 'production') {
+		$add_score = "INSERT INTO `heroku_6b647d0a28c075b`.`scores` (`user_id`, `score`, `is_win`, `date_created`) 
+				  	  VALUES ($user_id, $score, '$is_win', '$date')";
+	} else {
+		$add_score = "INSERT INTO `itvillage`.`scores` (`user_id`, `score`, `is_win`, `date_created`) 
+				  	  VALUES ($user_id, $score, '$is_win', '$date')";
+	}
 
 	$add_score_result = mysqli_query($connection, $add_score);
 
 	// select user's win count and increment it if it's a win
 	if ($is_win) {
-		$select_user_win_count = "SELECT `wins_count` FROM `itvillage`.`users` WHERE `user_id` = '$user_id'";
+		if (getenv('environment') == 'production') {
+			$select_user_win_count = "SELECT `wins_count` FROM `heroku_6b647d0a28c075b`.`users` WHERE `user_id` = '$user_id'";
+		} else {
+			$select_user_win_count = "SELECT `wins_count` FROM `itvillage`.`users` WHERE `user_id` = '$user_id'";
+		}
+
 		$select_user_win_count_result = mysqli_query($connection, $select_user_win_count);
 
 		$count = mysqli_fetch_assoc($select_user_win_count_result);
