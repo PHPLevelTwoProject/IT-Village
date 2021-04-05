@@ -44,7 +44,7 @@ $result = mysqli_query($connection, $get_user_scores_ordered_by_wins_count);
 							echo "<caption>Резултатите на всички играли потребители.</caption>";
 							echo "<tr>";
                                 echo "<td class='reduced-size-ten-percent'>#</td>";
-                                echo "<td class='reduced-size'>Потребителско име</td>";
+                                echo "<td class='reduced-size'>Потребител</td>";
                                 echo "<td class='reduced-size'>Дата на игра</td>";
 							    echo "<td class='reduced-size'>Резултат</td>";
 							    echo "<td class='reduced-size'>Загуба/победа</td></tr>";
