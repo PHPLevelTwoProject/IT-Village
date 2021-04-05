@@ -2,7 +2,7 @@
 
 include 'partials/header.php';
 if(isset($_GET['check'])){
-	echo "<script>alert('Моля влезте в профила си за да играете');</script>"; 
+	echo "<script>alert('Моля, влезте в профила си, за да играете.');</script>";
 }
 ?>
 
