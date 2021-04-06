@@ -19,22 +19,19 @@ include './partials/header.php';
                     <form action="" method="POST">
                         <div class="form-group">
                             <label for="username">Потребителско име</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                   placeholder="Вашето потребителско име">
+                            <input type="text" class="form-control" id="username" name="username">
                             <small class="text-muted">Позволени са само букви и цифри</small>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="password">Парола</label>
-                            <input type="password" name="password" class="form-control" id="password"
-                                   placeholder="Вашата парола">
+                            <input type="password" name="password" class="form-control" id="password">
                             <small class="text-muted">Позволени са само букви и цифри</small>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="repeat-password">Повторете паролата</label>
-                            <input type="password" name="repeat_password" class="form-control" id="repeat-password"
-                                   placeholder="Повторете вашата парола">
+                            <input type="password" name="repeat_password" class="form-control" id="repeat-password">
                             <small class="text-muted">Позволени са само букви и цифри</small>
                         </div>
                         <br>
