@@ -66,11 +66,11 @@ if (isset($_POST['submit'])) {
 					//header('location: index.php');
 					echo "<div class='text-center'><h1>Успешен вход. <a href='play.php'>Играй</а>.</h1></div>";
 				} else {
-					echo 'Грешна парола';
+					echo "<div class='text-center'><h1>Грешна парола.</h1></div>";
 				}
 		} else {
-			echo 'Грешен потребител';
-		}
+			echo "<div class='text-center'><h1>Грешен потребител.</h1></div>";
+			}
 	} else {
 		echo "<div class='text-center'><h1>Моля въведете само букви и цифри.</h1></div>";
 	}
