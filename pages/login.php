@@ -63,8 +63,7 @@ if (isset($_POST['submit'])) {
 			$db_pass = $row['password'];
 				if (password_verify($pass, $db_pass)) {
 					$_SESSION['user'] = $user;
-					//header('location: index.php');
-					echo "<div class='text-center'><h1>Успешен вход. <a href='play.php'>Играй</а>.</h1></div>";
+					echo '<script>window.location="index.php?logged" </script>';
 				} else {
 					echo "<div class='text-center'><h1>Грешна парола.</h1></div>";
 				}
