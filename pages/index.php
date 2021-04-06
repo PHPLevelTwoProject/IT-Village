@@ -1,16 +1,17 @@
 <?php
-
 include 'partials/header.php';
-
-if (isset($_GET['check'])) {
-	echo "<script>alert('Моля, влезте в профила си, за да играете.');</script>";
-}
-
 ?>
 
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center ">
     <div class="container ">
+	<?php
+	if (isset($_GET['check'])) {
+		echo "<div class='text-center'><h1>Моля, влезте в профила си, за да играете.</h1></div>";
+	}
+	if (isset($_GET['logged'])) {
+		echo "<div class='text-center'><h1>Успешен вход.</h1></div>";
+	} ?>
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center">
                 <h1 data-aos="fade-up">PHP Project Level Two</h1>
