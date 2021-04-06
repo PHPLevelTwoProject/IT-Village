@@ -49,43 +49,39 @@ include './partials/header.php';
 <?php
 if (isset($_POST['submit'])) {
 	$flag = 'check ok';
-	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
-		preg_match('/^[a-zA-Z0-9]+$/', $_POST['password']) &&
-		preg_match('/^[a-zA-Z0-9]+$/', $_POST['repeat_password'])) {
-
-		$user = $_POST['username'];
-		$pass = $_POST['password'];
-		$repeat_pass = $_POST['repeat_password'];
-
+	$user = $_POST['username'];
+	$pass = $_POST['password'];
+	$repeat_pass = $_POST['repeat_password'];
+	if (preg_match('/^[a-zA-Z0-9]+$/', $user) &&
+		preg_match('/^[a-zA-Z0-9]+$/', $pass) &&
+		preg_match('/^[a-zA-Z0-9]+$/', $repeat_pass)) {
+	
 		if (getenv('environment') == 'production') {
-			$sql = "SELECT `username`,`password` FROM `heroku_6b647d0a28c075b`.`users` WHERE `date_deleted` IS NULL";
+			$sql = "SELECT `username` FROM `heroku_6b647d0a28c075b`.`users` WHERE `username` = '$user'";
 		} else {
-			$sql = "SELECT `username`,`password` FROM `itvillage`.`users` WHERE `date_deleted` IS NULL";
+			$sql = "SELECT `username` FROM `itvillage`.`users` WHERE `username` = '$user'";
 		}
-
 		$result = mysqli_query($connection, $sql);
-
-		while ($row = mysqli_fetch_assoc($result)) {
-			if ($user == $row['username']) {
-				echo "<div class='text-center'><h1>Има потребител с това име.</h1></div>";
-				$flag = 'check error';
-			}
+		if (mysqli_num_rows($result) > 0) {
+			$flag = 'error name';
+		} else {
+			if ($pass != $repeat_pass) {
+				$flag = 'error pass';
+			}	
 		}
 	} else {
+		$flag = 'check error';
+	}
+	
+	if ($flag == 'check error') {
 		echo "<div class='text-center'><h1>Моля, въведете само букви и цифри.</h1></div>";
-		$flag = 'check error';
-	}
-	if ($_POST['password'] != $_POST['repeat_password']) {
-		echo "<div class='text-center'><h1>Моля, въведете еднаква парола.</h1></div>";
-		$flag = 'check error';
-	}
-	if ($flag == 'check ok') {
+	} elseif ($flag == 'error name'){
+		echo "<div class='text-center'><h1>Има потребител с това име.</h1></div>";
+	} elseif ($flag == 'error pass'){
+		echo "<div class='text-center'><h1>Моля, въведете еднаква парола.</h1></div>";	
+	} else {
+		$password_hashed = password_hash($pass,PASSWORD_DEFAULT);
 		$date = date("Y-m-d");
-
-		// hashing the user's password with secure algorithm so if the db gets dumped the data is secure and cannot be de-hashed
-		// hashing uses one-way functions
-		$password_hashed = hash('sha512', $pass);
-
 		if (getenv('environment') == 'production') {
 			$add_sql = "INSERT INTO `heroku_6b647d0a28c075b`.`users`(`username`, `password`,`date_created` ) 
                         VALUES ('$user', '$password_hashed', '$date')";
@@ -93,13 +89,11 @@ if (isset($_POST['submit'])) {
 			$add_sql = "INSERT INTO `itvillage`.`users`(`username`, `password`,`date_created` ) 
                         VALUES ('$user', '$password_hashed', '$date')";
 		}
-
 		$add_result = mysqli_query($connection, $add_sql);
-
 		if ($add_result) {
 			echo "<div class='text-center'><h1>Успешна регистрация. <a href='login.php'>Вход</а>.</h1></div>";
 		} else {
-			echo 'error';
+			echo "<div class='text-center'><h1>Неуспешна регистрация.</h1></div>";
 		}
 	}
 }
