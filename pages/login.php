@@ -39,12 +39,11 @@ include './partials/header.php';
 
 <?php
 if (isset($_POST['submit'])) {
-	$user = $_POST['username'];
-	$pass = $_POST['password'];
-	
-	if (preg_match('/^[a-zA-Z0-9]+$/',$user) &&
-        preg_match('/^[a-zA-Z0-9]+$/', $pass)) {
-		$sql = "`users` WHERE `username` = '$user' AND `date_deleted` IS NULL";
+	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
+        preg_match('/^[a-zA-Z0-9]+$/', $_POST['password'])) {
+		$user = htmlspecialchars($_POST['username']);
+		$pass = htmlspecialchars($_POST['password']);	
+		$sql = "`users` WHERE `username` = '$user' AND `date_deleted` IS NULL LIMIT 1";
 	    // use remote database if the environment is production
 		if (getenv('environment') == 'production') {
 			$sql_user = "SELECT `username` FROM `heroku_6b647d0a28c075b`.$sql";
