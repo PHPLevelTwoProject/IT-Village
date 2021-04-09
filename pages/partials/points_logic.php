@@ -13,7 +13,7 @@
  * Празни полета - 0 - Празно поле - - - Винаги 4
  */
 
-// Start => P => I => F => S => F => V => I => F => F => I => N => P =>  Go to First Position
+// Start => P => I => F => S => F => V => I => F => F => I => N => P => Go to First Position
 // Start => Wi-Fi-Bar => Wi-Fi-Motel => Freelance Project
 //       => Storm => Freelance Project => Super-PHP => Wi-Fi-Motel
 //       => Freelance Project => Freelance Project => Wi-Fi-Motel => VSO
@@ -28,7 +28,6 @@
 //	"Super-PHP" => "* 10",
 //	"VSO" => "win the game",
 //];
-
 
 if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gameground_position'] != -1) {
 	$_SESSION['turns_count'] -= 1;
@@ -53,49 +52,47 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		//    meaning we have to free him, by setting the bool to false
 	}
 	else {
-		if (isset($position) && $position == 0) { // Bar
+		if (isset($position) && $position == 0) {
 			bar();
 		}
-		else if (isset($position) && $position == 1) { // Motel
+		else if (isset($position) && $position == 1) {
 			motel();
 		}
-		else if (isset($position) && $position == 2) { // Freelance Project
+		else if (isset($position) && $position == 2) {
 			freelance();
 		}
-		else if (isset($position) && $position == 3) { // Storm
+		else if (isset($position) && $position == 3) {
 			storm();
 		}
-		else if (isset($position) && $position == 4) { // Freelance Project
+		else if (isset($position) && $position == 4) {
 			freelance();
 		}
-		else if (isset($position) && $position == 5) { // Super-PHP
+		else if (isset($position) && $position == 5) {
 			super_php();
 		}
-		else if (isset($position) && $position == 6) { // Motel
+		else if (isset($position) && $position == 6) {
 			motel();
 		}
-		else if (isset($position) && $position == 7) { // Freelance Project
+		else if (isset($position) && $position == 7) {
 			freelance();
 		}
-		else if (isset($position) && $position == 8) { // Freelance Project
+		else if (isset($position) && $position == 8) {
 			freelance();
 		}
-		else if (isset($position) && $position == 9) { // Motel
+		else if (isset($position) && $position == 9) {
 			motel();
 		}
-//		else if (isset($position) && $position == 10) { // VSO, already handled logic by the function below
-//			win_game();
-//		}
-		else if (isset($position) && $position == 11) { // bar
+// 		VSO, already handled logic
+//		else if (isset($position) && $position == 10) { win_game(); }
+		else if (isset($position) && $position == 11) {
 			bar();
 		}
 	}
 
-	// always check the state
 	check_if_game_is_lost_or_won_and_take_action();
 }
 
-// he stepped on storm :(
+// the turn is storm
 function storm(){
 	$_SESSION['has_to_skip_two_rounds'] = true;
 }
@@ -140,34 +137,28 @@ function freelance(){
 	$_SESSION['user_points'] += 20;
 }
 
-// game ends when player has:
-// - insufficient money
-// - bought every single motel
-// - no more turns
-// - stepped on VSO field - already handled by win_game()
-// to be implemented: save his score to db (name, score, date of game played)
 function check_if_game_is_lost_or_won_and_take_action() {
 	if ($_SESSION['user_points'] <= 0) {
-		// he is lost because of money, set that value to true and return
+		// he have lost because of insufficient money, set that value to true and redirect
 		save_score_to_database(false);
 		$_SESSION['user_has_lost_because_of_money'] = true;
 		header('Location: lost.php');
 	}
 	if ($_SESSION['turns_count'] == 0) {
-		// he is lost because of insufficient turns, set that value to true and return,
+		// he have lost because of insufficient turns, set that value to true and redirect
 		save_score_to_database(false);
 		$_SESSION['user_has_lost_because_of_turns'] = true;
 		header('Location: lost.php');
 	}
 
 	if ($_SESSION['current_gameground_position'] == 10) {
-		// he has the support of vso => wins
+		// he has the support of vso => wins, set that value to true and redirect
 		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_vso'] = true;
 		header('Location: won.php');
 	}
 	if ($_SESSION['motels_bought'] == 3) {
-		// he bought all motels -> he wins, write to database and render result
+		// he has bought all motels and therefore wins, set that value to true and redirect
 		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_motels'] = true;
 		header('Location: won.php');
@@ -179,6 +170,7 @@ function save_score_to_database($is_win) {
 	$score = $_SESSION['user_points'];
 	$date = date("Y-m-d");
 
+	// connect to different db depending on environment
 	if (getenv('environment') == 'production') {
 		//Get Heroku ClearDB connection information
 		$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));

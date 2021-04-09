@@ -3,7 +3,8 @@
 session_start();
 
 /**
- * @var object $connection
+ * @var object $connection .
+ * @var object $DB_NAME
  */
 include 'connect_db.php';
 include 'initialize_variables.php';
@@ -57,17 +58,16 @@ include 'initialize_variables.php';
                 <li><a class="nav-link" href="index.php#description">Описание</a></li>
                 <li><a class="nav-link" href="./rules.php">Правила</a></li>
                 <li><a class="nav-link" href="./statistics.php">Статистики</a></li>
-				<?php 
-				if(isset($_SESSION['user'])){
+				<?php
+				if (isset($_SESSION['user'])) {
 					echo "<li><a class='nav-link' href='play.php'>Играй</a></li>";
 					echo "<li><a class='nav-link'> Потребител: " . $_SESSION['user'] . "</a></li>";
 					echo "<li><a class='nav-link' href='partials/logout.php'>Изход</a></li>";
-				}else{
-				?>
-				<li><a class="nav-link" href="index.php?check=false">Играй</a></li>
-				<li><a class="nav-link" href="./login.php">Влез</a></li>
-				<li><a class="nav-link" href="./register.php">Регистрирай се</a></li>
-			<?php	}	?>
+				} else {
+					echo "<li><a class='nav-link' href='index.php?check=false'>Играй</a></li>";
+					echo "<li><a class='nav-link' href='./login.php'>Влез</a></li>";
+					echo "<li><a class='nav-link' href='./register.php'>Регистрирай се</a></li>";
+				} ?>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

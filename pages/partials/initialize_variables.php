@@ -66,12 +66,3 @@ if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
 if (!isset($_SESSION['has_recently_stepped_on_storm'])) {
 	$_SESSION['has_recently_stepped_on_storm'] = false;
 }
-
-// login logic
-//if (!isset($_SESSION['user'])) {
-//	$_SESSION['user'] = "";
-//}
-//
-//if (!$_SESSION['user_id']) {
-//	$_SESSION['user_id'] = 0;
-//}

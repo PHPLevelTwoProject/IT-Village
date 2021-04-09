@@ -75,4 +75,5 @@ db_export/itvillage.sql.zip
 *.xml
 
 # Custom
+.idea
 vendor/

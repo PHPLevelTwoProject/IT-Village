@@ -14,49 +14,24 @@ if ($_SESSION['current_gameground_position'] > 11) {
 }
 
 $position = $_SESSION['current_gameground_position'];
+$validated_position = ($position >= 0 && $position <= 11) ? $position : "";
 
-if ($position == 0) { ?>
-	<img src="./images/gameground/gameground_state_0.png" alt=""><br><br>
-<?php }
-if ($position == 1) { ?>
-	<img src="./images/gameground/gameground_state_1.png" alt=""><br><br>
-<?php }
-if ($position == 2) { ?>
-	<img src="./images/gameground/gameground_state_2.png" alt=""><br><br>
-<?php }
-if ($position == 3) { ?>
-	<img src="./images/gameground/gameground_state_3.png" alt=""><br><br>
-<?php }
-if ($position == 4) { ?>
-	<img src="./images/gameground/gameground_state_4.png" alt=""><br><br>
-<?php }
-if ($position == 5) { ?>
-	<img src="./images/gameground/gameground_state_5.png" alt=""><br><br>
-<?php }
-if ($position == 6) { ?>
-	<img src="./images/gameground/gameground_state_6.png" alt=""><br><br>
-<?php }
-if ($position == 7) { ?>
-	<img src="./images/gameground/gameground_state_7.png" alt=""><br><br>
-<?php }
-if ($position == 8) { ?>
-	<img src="./images/gameground/gameground_state_8.png" alt=""><br><br>
-<?php }
-if ($position == 9) { ?>
-	<img src="./images/gameground/gameground_state_9.png" alt=""><br><br>
-<?php }
+?>
+
+<img src="./images/gameground/gameground_state_<?= $validated_position ?>.png" alt=""><br><br>
+
+<?php
+
 if ($position == 10) {
-	$_SESSION['user_has_won_because_of_vso'] = true;
-	check_if_game_is_lost_or_won_and_act();
-	return; ?>
-	<img src="./images/gameground/gameground_state_10.png" alt=""><br><br>
-<?php }
-if ($position == 11) { ?>
-	<img src="./images/gameground/gameground_state_11.png" alt=""><br><br>
-<?php }
+    $_SESSION['user_has_won_because_of_vso'] = true;
+	check_if_game_is_won_and_act();
+    return;
+}
 
-function check_if_game_is_lost_or_won_and_act() {
+function check_if_game_is_won_and_act() {
 	if ($_SESSION['user_has_won_because_of_vso']) {
 		header('Location: ./won.php');
 	}
 }
+
+?>
