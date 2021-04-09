@@ -46,17 +46,16 @@ include './partials/header.php';
 <?php
 if (isset($_POST['submit'])) {
 	$flag = 'check ok';
-	$user = $_POST['username'];
-	$pass = $_POST['password'];
-	$repeat_pass = $_POST['repeat_password'];
-	if (preg_match('/^[a-zA-Z0-9]+$/', $user) &&
-		preg_match('/^[a-zA-Z0-9]+$/', $pass) &&
-		preg_match('/^[a-zA-Z0-9]+$/', $repeat_pass)) {
-	
+	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
+		preg_match('/^[a-zA-Z0-9]+$/', $_POST['password']) &&
+		preg_match('/^[a-zA-Z0-9]+$/', $_POST['repeat_password'])) {
+		$user = htmlspecialchars($_POST['username']);
+		$pass = htmlspecialchars($_POST['password']);
+		$repeat_pass = htmlspecialchars($_POST['repeat_password']);
 		if (getenv('environment') == 'production') {
-			$sql = "SELECT `username` FROM `heroku_6b647d0a28c075b`.`users` WHERE `username` = '$user'";
+			$sql = "SELECT `username` FROM `heroku_6b647d0a28c075b`.`users` WHERE `username` = '$user' LIMIT 1";
 		} else {
-			$sql = "SELECT `username` FROM `itvillage`.`users` WHERE `username` = '$user'";
+			$sql = "SELECT `username` FROM `itvillage`.`users` WHERE `username` = '$user' LIMIT 1";
 		}
 		$result = mysqli_query($connection, $sql);
 		if (mysqli_num_rows($result) > 0) {
