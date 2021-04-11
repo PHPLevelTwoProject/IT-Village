@@ -9,7 +9,7 @@ $validated_random_dice_number = ($random_dice_number >= 1 && $random_dice_number
 
 ?>
 
-<img src="./images/dice/dice_<?= $validated_random_dice_number ?>.png" alt="">
+<img class="resize-small" src="./images/dice/dice_<?= $validated_random_dice_number ?>.png" alt="">
 <br><br>
 
 <?php

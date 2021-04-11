@@ -18,7 +18,7 @@ $validated_position = ($position >= 0 && $position <= 11) ? $position : "";
 
 ?>
 
-<img src="./images/gameground/gameground_state_<?= $validated_position ?>.png" alt=""><br><br>
+<img class="resize-small" src="./images/gameground/gameground_state_<?= $validated_position ?>.png" alt=""><br><br>
 
 <?php
 
