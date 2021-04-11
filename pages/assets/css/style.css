@@ -481,6 +481,10 @@ section {
     }
 }
 
+.padded-top-five {
+    padding-top: 5%;
+}
+
 .padded-top {
     padding-top: 15%;
 }
