@@ -472,9 +472,12 @@ section {
 # Footer and custom
 --------------------------------------------------------------*/
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-@media (min-width:320px)  {
+@media (max-width:480px)  {
     .resize-small {
-        width: 30% ;
+        width: 30%;
+    }
+    h1 {
+        font-size: 10% !important;
     }
 }
 
@@ -489,8 +492,6 @@ h1 {
 p, h1 {
     color: #242424;
 }
-
-
 
 .spaced {
     padding-bottom: 400px;
