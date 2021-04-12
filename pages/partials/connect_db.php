@@ -12,11 +12,9 @@ if (getenv('environment') == 'production') {
 
 	// Connect to DB
 	$connection = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-	define("DB_NAME", "heroku_6b647d0a28c075b");
 }
 else {
 	$connection = mysqli_connect("127.0.0.1","root","","itvillage");
-	define("DB_NAME", "itvillage");
 }
 
 if (!$connection) {
