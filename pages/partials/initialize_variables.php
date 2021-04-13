@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($text_to_render)) {
+	$text_to_render = "";
+}
+
 // start with 50 points
 if (!isset($_SESSION['user_points'])) {
 	$_SESSION['user_points'] = 50;
@@ -38,7 +42,7 @@ if (!isset($_SESSION['turns_count'])) {
 	// generate user's starting point and turns' count
 	if ($_SESSION['click_count'] == 0 && $_SESSION['turns_count'] == -1) {
 		$_SESSION['turns_count'] = rand(1, 20);
-		$_SESSION['starting_point'] = rand(0, 11);
+		$_SESSION['starting_point'] = rand(1, 10);
 	}
 }
 
@@ -63,6 +67,7 @@ if (!isset($_SESSION['user_has_lost_because_of_money'])) {
 if (!isset($_SESSION['user_has_lost_because_of_turns'])) {
 	$_SESSION['user_has_lost_because_of_turns'] = false;
 }
+
 if (!isset($_SESSION['has_recently_stepped_on_storm'])) {
 	$_SESSION['has_recently_stepped_on_storm'] = false;
 }

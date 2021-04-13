@@ -1,17 +1,23 @@
 <?php
-include 'partials/header.php';
-?>
 
-<!-- ======= Hero Section ======= -->
-<section id="hero" class="hero d-flex align-items-center ">
-    <div class="container ">
-	<?php
+include 'partials/header.php';
+
+function login_or_register_html()
+{
 	if (isset($_GET['check'])) {
 		echo "<div class='text-center'><h1>Моля, влезте в профила си, за да играете.</h1></div>";
 	}
 	if (isset($_GET['logged'])) {
 		echo "<div class='text-center'><h1>Успешен вход.</h1></div>";
-	} ?>
+	}
+}
+
+?>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex align-items-center ">
+    <div class="container ">
+		<?php login_or_register_html(); ?>
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center">
                 <h1 data-aos="fade-up">PHP Project Level Two</h1>
@@ -24,7 +30,6 @@ include 'partials/header.php';
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
-
                 </div>
             </div>
             <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
