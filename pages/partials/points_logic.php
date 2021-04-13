@@ -82,8 +82,9 @@ if (isset($_SESSION['current_gameground_position']) && $_SESSION['current_gamegr
 		else if (isset($position) && $position == 9) {
 			motel();
 		}
-// 		VSO, already handled logic
-//		else if (isset($position) && $position == 10) { win_game(); }
+		else if (isset($position) && $position == 10) {
+			check_if_game_is_lost_or_won_and_take_action();
+		}
 		else if (isset($position) && $position == 11) {
 			bar();
 		}
@@ -142,26 +143,25 @@ function check_if_game_is_lost_or_won_and_take_action() {
 		// he have lost because of insufficient money, set that value to true and redirect
 		save_score_to_database(false);
 		$_SESSION['user_has_lost_because_of_money'] = true;
-		header('Location: lost.php');
+		//header('Location: lost.php');
 	}
 	if ($_SESSION['turns_count'] == 0) {
 		// he have lost because of insufficient turns, set that value to true and redirect
 		save_score_to_database(false);
 		$_SESSION['user_has_lost_because_of_turns'] = true;
-		header('Location: lost.php');
+		//header('Location: lost.php');
 	}
-
 	if ($_SESSION['current_gameground_position'] == 10) {
 		// he has the support of vso => wins, set that value to true and redirect
 		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_vso'] = true;
-		header('Location: won.php');
+		//header('Location: won.php');
 	}
 	if ($_SESSION['motels_bought'] == 3) {
 		// he has bought all motels and therefore wins, set that value to true and redirect
 		save_score_to_database(true);
 		$_SESSION['user_has_won_because_of_motels'] = true;
-		header('Location: won.php');
+		//header('Location: won.php');
 	}
 }
 

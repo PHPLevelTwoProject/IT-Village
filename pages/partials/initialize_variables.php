@@ -1,5 +1,10 @@
 <?php
 
+
+if (!isset($text_to_render)) {
+	$text_to_render = "";
+}
+
 // start with 50 points
 if (!isset($_SESSION['user_points'])) {
 	$_SESSION['user_points'] = 50;

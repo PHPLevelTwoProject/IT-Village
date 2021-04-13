@@ -40,23 +40,23 @@ $result = mysqli_query($connection, $get_user_scores_ordered_by_wins_count);
                             <p>Статистики</p>
                             <hr>
 
-                            <?php
+							<?php
 
 							echo "<table class='table table-responsive table-striped table-hover table-bordered'>";
 							echo "<caption>Резултатите на всички играли потребители.</caption>";
 							echo "<tr>";
-                                echo "<td class='reduced-size-ten-percent'>#</td>";
-                                echo "<td class='reduced-size'>Потребител</td>";
-                                echo "<td class='reduced-size'>Дата на игра</td>";
-							    echo "<td class='reduced-size'>Точки</td>";
-							    echo "<td class='reduced-size'>Резултат</td></tr>";
+							echo "<td class='reduced-size-ten-percent'>#</td>";
+							echo "<td class='reduced-size'>Потребител</td>";
+							echo "<td class='reduced-size'>Дата на игра</td>";
+							echo "<td class='reduced-size'>Точки</td>";
+							echo "<td class='reduced-size'>Резултат</td></tr>";
 
 							$counter = 1;
 							while ($row = mysqli_fetch_assoc($result)) {
 								$username = htmlspecialchars($row['username']);
 								$date_created = htmlspecialchars($row['date_created']);
-								$score =  htmlspecialchars($row['score']);
-								$is_win =  htmlspecialchars($row['result']);
+								$score = htmlspecialchars($row['score']);
+								$is_win = htmlspecialchars($row['result']);
 
 								echo "<tr><td>$counter</td><td>$username</td><td>$date_created</td><td>$score</td><td>$is_win</td></tr>";
 								$counter++;
