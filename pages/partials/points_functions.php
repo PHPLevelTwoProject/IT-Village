@@ -107,8 +107,8 @@ function modify_points() {
 
 		// if he has to skip position we don't move him
 		if ($_SESSION['has_to_skip_two_rounds'] == true) {
-			// increment skipped rounds count to keep track of them
 			$_SESSION['skipped_rounds_count'] += 1;
+
 			// if he has already skipped two rounds, free him
 			if ($_SESSION['skipped_rounds_count'] == 2) {
 				$_SESSION['skipped_rounds_count'] = 0;
@@ -146,9 +146,12 @@ function modify_points() {
 				freelance();
 			} else if (isset($position) && $position == 9) {
 				motel();
-			} else if (isset($position) && $position == 10) {
+			}
+			else if (isset($position) && $position == 10) {
 				check_if_game_is_lost_or_won_and_take_action();
-			} else if (isset($position) && $position == 11) {
+				return;
+			}
+			else if (isset($position) && $position == 11) {
 				bar();
 			}
 		}
@@ -215,7 +218,7 @@ function save_score_to_database($is_win)
 		$select_user_win_count_result = mysqli_query($connection, $select_user_win_count);
 
 		$count = mysqli_fetch_assoc($select_user_win_count_result);
-		$count["wins_count"] = (int)$count["wins_count"] + 1;
+		$count["wins_count"] = (int) $count["wins_count"] + 1;
 
 		$wins_count = $count["wins_count"];
 		$increment_wins_count = "UPDATE `itvillage`.`users` SET `wins_count` = '$wins_count' WHERE `user_id` = '$user_id'";

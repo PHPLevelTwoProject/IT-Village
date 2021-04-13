@@ -20,18 +20,26 @@ if (!isset($_SESSION['user'])) {
                 <div class="col-lg-12 text-center">
                     <div class="" data-aos="zoom-out" data-aos-delay="200">
 						<?php
-
 						increment_position_at_start();
 						correct_position();
-						render_ground();
-						modify_points();
 
+						$has_not_won_or_lost = (
+                                !$_SESSION['user_has_lost_because_of_turns'] && !$_SESSION['user_has_lost_because_of_money'] &&
+                                !$_SESSION['user_has_won_because_of_motels'] && !$_SESSION['user_has_won_because_of_vso']);
+
+						if ($has_not_won_or_lost) {
+							render_ground();
+							modify_points();
+						}
 						?>
                     </div>
                     <form action="">
 						<?php
-						if ($_SESSION['user_has_lost_because_of_turns'] || $_SESSION['user_has_lost_because_of_money'] ||
-							$_SESSION['user_has_won_because_of_motels'] || $_SESSION['user_has_won_because_of_vso']) {
+						$has_won_or_lost =
+                            $_SESSION['user_has_lost_because_of_turns'] || $_SESSION['user_has_lost_because_of_money'] ||
+							$_SESSION['user_has_won_because_of_motels'] || $_SESSION['user_has_won_because_of_vso'];
+
+						if ($has_won_or_lost){
 							check_for_win_or_lose();
 						} else if ($_SESSION['has_to_skip_two_rounds']) {
 							skipping_turn_message();
@@ -43,7 +51,7 @@ if (!isset($_SESSION['user'])) {
                     <br>
                     <div class="" data-aos="zoom-out" data-aos-delay="200">
 						<?php
-						if (!$_SESSION['has_to_skip_two_rounds']) {
+						if ($has_not_won_or_lost) {
 						    render_dice();
                         }
 						increment_dice_number();
