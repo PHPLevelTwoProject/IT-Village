@@ -19,3 +19,19 @@ $validated_position = ($position >= 0 && $position <= 11) ? $position : "";
 ?>
 
 <img class="resize-small" src="./images/gameground/gameground_state_<?= $validated_position ?>.png" alt=""><br><br>
+
+<?php
+
+if ($position == 10) {
+    $_SESSION['user_has_won_because_of_vso'] = true;
+	check_if_game_is_won_and_act();
+    return;
+}
+
+function check_if_game_is_won_and_act() {
+	if ($_SESSION['user_has_won_because_of_vso']) {
+		header('Location: ./won.php');
+	}
+}
+
+?>
