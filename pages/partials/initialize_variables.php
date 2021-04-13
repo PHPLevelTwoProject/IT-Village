@@ -1,6 +1,5 @@
 <?php
 
-
 if (!isset($text_to_render)) {
 	$text_to_render = "";
 }
