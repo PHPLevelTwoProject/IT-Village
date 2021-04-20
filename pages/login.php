@@ -20,13 +20,13 @@ include './partials/header.php';
                         <div class="form-group">
                             <label for="username">Потребителско име</label>
                             <input type="text" name="username" class="form-control" id="username">
-                            <small class="text-muted">Позволени са само букви и цифри</small>
+                            <small class="text-muted">Позволени са букви ( A-Z ,a-z ), цифри ( 0-9 ) и символи ( !@_#$%^*& ) </small>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="password">Парола</label>
                             <input type="password" name="password" class="form-control" id="password">
-                            <small class="text-muted">Позволени са само букви и цифри</small>
+                            <small class="text-muted">Позволени са букви ( A-Z, a-z ), цифри ( 0-9 ) и символи ( !@_#$%^*& )</small>
                         </div>
                         <br>
                         <input type="submit" name="submit" class="btn btn-outline-primary" value="Влез">
@@ -38,26 +38,20 @@ include './partials/header.php';
 </main>
 
 <?php
-
-if (isset($_POST['submit']) && $connection) {
-	login($connection);
-}
-
-function login($connection)
-{
-	if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) &&
-		preg_match('/^[a-zA-Z0-9]+$/', $_POST['password'])) {
+if (isset($_POST['submit'])) {
+	if (preg_match('/^[a-zA-Z0-9!@#$_%^&*]+$/', $_POST['username']) &&
+        preg_match('/^[a-zA-Z0-9!@#$_%^&*]+$/', $_POST['password'])) {
 		$user = htmlspecialchars($_POST['username']);
-		$pass = htmlspecialchars($_POST['password']);
+		$pass = htmlspecialchars($_POST['password']);	
 		$sql = "`users` WHERE `username` = '$user' AND `date_deleted` IS NULL LIMIT 1";
-
-		// use remote database if the environment is production
+		
+	    // use remote database if the environment is production
 		if (getenv('environment') == 'production') {
 			$sql_user = "SELECT `username` FROM `heroku_6b647d0a28c075b`.$sql";
 		} else {
 			$sql_user = "SELECT `username` FROM `itvillage`.$sql";
 		}
-
+		
 		$result_user = mysqli_query($connection, $sql_user);
 		if (mysqli_num_rows($result_user) > 0) {
 			if (getenv('environment') == 'production') {
@@ -65,11 +59,11 @@ function login($connection)
 			} else {
 				$sql_pass = "SELECT `password` FROM `itvillage`.$sql";
 			}
-
+			
 			$result_pass = mysqli_query($connection, $sql_pass);
 			$row = mysqli_fetch_assoc($result_pass);
 			$db_pass = $row['password'];
-
+			
 			if (password_verify($pass, $db_pass)) {
 				$_SESSION['user'] = $user;
 				echo '<script>window.location="index.php?logged" </script>';
@@ -78,9 +72,9 @@ function login($connection)
 			}
 		} else {
 			echo "<div class='text-center'><h1>Грешен потребител.</h1></div>";
-		}
+			}
 	} else {
-		echo "<div class='text-center'><h1>Моля въведете само букви и цифри.</h1></div>";
+		echo "<div class='text-center'><h1>Моля, въведете само букви ( A-Z , a-z ), цифри ( 0-9 ) и символи ( !@_#$%^*& )</h1></div>";
 	}
 }
 
