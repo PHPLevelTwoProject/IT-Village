@@ -1,34 +1,5 @@
 <?php
 
-/*
- * Wi-Fi кръчма - P - Трябва да си купите един Cloud Коктейл - -5 монети - няколко
- * Wi-Fi мотел - I - Много
- * -- Ако имате достатъчно пари, трябва да го купите -> -100 монети
- * -- Ако нямате достатъчно пари, трябва да си платите за престоя -> -10 монети
- * Freelance Project - F - Получавате заплащане - +20 монети - Много
- * Буря - S - Wi-Fi в селото умира и вие се депресирате и изпускате 2 хода. - Много
- * Супер РНР - V - Монетите ви се увеличават 10 пъти - *10 - Само едно поле
- * VSO - N - Ако стъпите на това поле - печелите игра - едно
- * Входна позиция - - - Полето, от което стартирате играта - Само едно
- * Празни полета - 0 - Празно поле - - - Винаги 4
- */
-
-// Start => P => I => F => S => F => V => I => F => F => I => N => P => Go to First Position
-// Start => Wi-Fi-Bar => Wi-Fi-Motel => Freelance Project
-//       => Storm => Freelance Project => Super-PHP => Wi-Fi-Motel
-//       => Freelance Project => Freelance Project => Wi-Fi-Motel => VSO
-//       => Wi-Fi-Bar => Go to First Position
-
-//$points = [
-//	"Wi-Fi-Bar" => "-5 money",
-//	"Wi-Fi-Motel-1" => "-100 money",
-//	"Wi-Fi-Motel-2" => "-10 money",
-//	"Freelance-Project" => "+20 money",
-//	"Storm" => "skip 2 rounds money",
-//	"Super-PHP" => "* 10",
-//	"VSO" => "win the game",
-//];
-
 // the turn is storm
 function storm()
 {
@@ -81,22 +52,22 @@ function check_if_game_is_lost_or_won_and_take_action()
 {
 	if ($_SESSION['user_points'] <= 0) {
 		// he have lost because of insufficient money, set that value to true and redirect
-		save_score_to_database(false);
+		save_score_to_database(0);
 		$_SESSION['user_has_lost_because_of_money'] = true;
 	}
 	if ($_SESSION['turns_count'] == 0) {
 		// he have lost because of insufficient turns, set that value to true and redirect
-		save_score_to_database(false);
+		save_score_to_database(1);
 		$_SESSION['user_has_lost_because_of_turns'] = true;
 	}
 	if ($_SESSION['current_gameground_position'] == 10) {
 		// he has the support of vso => wins, set that value to true and redirect
-		save_score_to_database(true);
+		save_score_to_database(2);
 		$_SESSION['user_has_won_because_of_vso'] = true;
 	}
 	if ($_SESSION['motels_bought'] == 3) {
 		// he has bought all motels and therefore wins, set that value to true and redirect
-		save_score_to_database(true);
+		save_score_to_database(3);
 		$_SESSION['user_has_won_because_of_motels'] = true;
 	}
 }
