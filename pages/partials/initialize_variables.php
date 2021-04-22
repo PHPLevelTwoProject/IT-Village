@@ -41,7 +41,7 @@ if (!isset($_SESSION['turns_count'])) {
 
 	// generate user's starting point and turns' count
 	if ($_SESSION['click_count'] == 0 && $_SESSION['turns_count'] == -1) {
-		$_SESSION['turns_count'] = rand(1, 20);
+		$_SESSION['turns_count'] = rand(5, 20);
 		$_SESSION['starting_point'] = rand(1, 10);
 	}
 }
