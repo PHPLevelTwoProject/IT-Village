@@ -1,20 +1,10 @@
 <?php
 
 include 'partials/header.php';
-
-function login_or_register_html()
-{
-	if (isset($_GET['check'])) {
-		echo "<div class='text-center'><h1>Моля, влезте в профила си, за да играете.</h1></div>";
-	}
-	if (isset($_GET['logged'])) {
-		echo "<div class='text-center'><h1>Успешен вход.</h1></div>";
-	}
-}
+include 'partials/check_login.php';
 
 ?>
 
-<!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center ">
     <div class="container ">
 		<?php login_or_register_html(); ?>
@@ -38,10 +28,7 @@ function login_or_register_html()
         </div>
     </div>
 </section>
-<!-- ======= End Hero Section ======= -->
-
 <main id="main">
-    <!-- ======= Project Section ======= -->
     <section id="project" class="project spaced">
         <div id="description" class="container" data-aos="fade-up">
             <header class="section-header">
@@ -69,7 +56,6 @@ function login_or_register_html()
             </div>
         </div>
     </section>
-    <!-- ======= End Project Section ======= -->
 </main>
 
 <?php
